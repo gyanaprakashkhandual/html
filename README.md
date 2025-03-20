@@ -1,2 +1,2 @@
 # Github
-Pratice of Hithub
+I am Chris hemsworth I am learning git now.
