@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Tags</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Syne', sans-serif;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-zinc-900 min-h-screen">
+    <header class="border-b border-zinc-200 px-8 py-6">
+        <div class="max-w-5xl mx-auto flex items-center gap-4">
+            <span class="bg-amber-400 text-zinc-950 text-xs font-bold px-2 py-1 rounded">BASIC</span>
+            <h1 class="text-3xl font-extrabold tracking-tight">HTML Tags</h1>
+        </div>
+    </header>
+    <main class="max-w-5xl mx-auto px-8 py-12 space-y-16">
+
+        <section>
+            <h2 class="text-amber-500 text-xs font-bold tracking-widest uppercase mb-6">Document Structure</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white border border-zinc-200 rounded-xl p-6">
+                    <code class="text-amber-500 text-sm">&lt;html&gt;</code>
+                    <p class="text-zinc-600 text-sm mt-2">Root element of an HTML page</p>
+                </div>
+                <div class="bg-white border border-zinc-200 rounded-xl p-6">
+                    <code class="text-amber-500 text-sm">&lt;head&gt;</code>
+                    <p class="text-zinc-600 text-sm mt-2">Contains meta-information about the document</p>
+                </div>
+                <div class="bg-white border border-zinc-200 rounded-xl p-6">
+                    <code class="text-amber-500 text-sm">&lt;body&gt;</code>
+                    <p class="text-zinc-600 text-sm mt-2">Contains the visible page content</p>
+                </div>
+                <div class="bg-white border border-zinc-200 rounded-xl p-6">
+                    <code class="text-amber-500 text-sm">&lt;title&gt;</code>
+                    <p class="text-zinc-600 text-sm mt-2">Defines the document title shown in browser tab</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-amber-500 text-xs font-bold tracking-widest uppercase mb-6">Heading Tags</h2>
+            <div class="bg-white border border-zinc-200 rounded-xl p-8 space-y-4">
+                <h1 class="text-4xl font-extrabold">h1 — Main Heading</h1>
+                <h2 class="text-3xl font-bold">h2 — Section Heading</h2>
+                <h3 class="text-2xl font-bold">h3 — Subsection Heading</h3>
+                <h4 class="text-xl font-semibold">h4 — Sub-subsection Heading</h4>
+                <h5 class="text-lg font-semibold text-zinc-700">h5 — Minor Heading</h5>
+                <h6 class="text-base font-semibold text-zinc-600">h6 — Smallest Heading</h6>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-amber-500 text-xs font-bold tracking-widest uppercase mb-6">Text Formatting Tags</h2>
+            <div class="bg-white border border-zinc-200 rounded-xl p-8 space-y-4 text-sm">
+                <p><code class="text-amber-500">&lt;p&gt;</code> —
+                <p class="inline text-zinc-700">This is a paragraph tag. It defines a block of text.</p>
+                </p>
+                <p><code class="text-amber-500">&lt;b&gt;</code> — <b>Bold text without importance</b></p>
+                <p><code class="text-amber-500">&lt;strong&gt;</code> — <strong>Important bold text</strong></p>
+                <p><code class="text-amber-500">&lt;i&gt;</code> — <i>Italic text without emphasis</i></p>
+                <p><code class="text-amber-500">&lt;em&gt;</code> — <em>Emphasized italic text</em></p>
+                <p><code class="text-amber-500">&lt;u&gt;</code> — <u>Underlined text</u></p>
+                <p><code class="text-amber-500">&lt;s&gt;</code> — <s>Strikethrough text</s></p>
+                <p><code class="text-amber-500">&lt;mark&gt;</code> — <mark
+                        class="bg-amber-200 text-zinc-900 px-1">Highlighted text</mark></p>
+                <p><code class="text-amber-500">&lt;small&gt;</code> — <small>Smaller text</small></p>
+                <p><code class="text-amber-500">&lt;sup&gt;</code> — E=mc<sup>2</sup></p>
+                <p><code class="text-amber-500">&lt;sub&gt;</code> — H<sub>2</sub>O</p>
+                <p><code class="text-amber-500">&lt;abbr&gt;</code> — <abbr
+                        title="HyperText Markup Language">HTML</abbr> (hover to see title)</p>
+                <p><code class="text-amber-500">&lt;q&gt;</code> — <q>An inline quotation element</q></p>
+                <p><code class="text-amber-500">&lt;cite&gt;</code> — <cite>The Art of HTML Design</cite></p>
+                <p><code class="text-amber-500">&lt;code&gt;</code> — <code
+                        class="bg-zinc-100 px-1 rounded">console.log('Hello')</code></p>
+                <p><code class="text-amber-500">&lt;kbd&gt;</code> — Press <kbd
+                        class="bg-zinc-200 border border-zinc-300 px-2 py-0.5 rounded text-xs">Ctrl</kbd> + <kbd
+                        class="bg-zinc-200 border border-zinc-300 px-2 py-0.5 rounded text-xs">C</kbd></p>
+                <p><code class="text-amber-500">&lt;pre&gt;</code> —
+                <pre class="bg-zinc-100 p-2 rounded text-xs inline-block">Preformatted
+  text preserves spaces</pre>
+                </p>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-amber-500 text-xs font-bold tracking-widest uppercase mb-6">List Tags</h2>
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="bg-white border border-zinc-200 rounded-xl p-6">
+                    <code class="text-amber-500 text-xs">&lt;ul&gt; Unordered</code>
+                    <ul class="list-disc list-inside mt-4 text-sm space-y-1 text-zinc-700">
+                        <li>Apple</li>
+                        <li>Banana</li>
+                        <li>Cherry</li>
+                    </ul>
+                </div>
+                <div class="bg-white border border-zinc-200 rounded-xl p-6">
+                    <code class="text-amber-500 text-xs">&lt;ol&gt; Ordered</code>
+                    <ol class="list-decimal list-inside mt-4 text-sm space-y-1 text-zinc-700">
+                        <li>First</li>
+                        <li>Second</li>
+                        <li>Third</li>
+                    </ol>
+                </div>
+                <div class="bg-white border border-zinc-200 rounded-xl p-6">
+                    <code class="text-amber-500 text-xs">&lt;dl&gt; Description</code>
+                    <dl class="mt-4 text-sm text-zinc-700">
+                        <dt class="font-bold text-zinc-900">HTML</dt>
+                        <dd class="ml-4 text-zinc-600">Markup language</dd>
+                        <dt class="font-bold text-zinc-900 mt-2">CSS</dt>
+                        <dd class="ml-4 text-zinc-600">Style sheets</dd>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-amber-500 text-xs font-bold tracking-widest uppercase mb-6">Semantic & Structural Tags</h2>
+            <div class="grid md:grid-cols-2 gap-4 text-sm">
+                <div class="bg-white border border-zinc-200 rounded-xl p-6">
+                    <div class="space-y-3 text-zinc-700">
+                        <div><code class="text-amber-500">&lt;header&gt;</code> — Page or section header</div>
+                        <div><code class="text-amber-500">&lt;nav&gt;</code> — Navigation links</div>
+                        <div><code class="text-amber-500">&lt;main&gt;</code> — Main content area</div>
+                        <div><code class="text-amber-500">&lt;section&gt;</code> — Thematic section</div>
+                        <div><code class="text-amber-500">&lt;article&gt;</code> — Self-contained content</div>
+                        <div><code class="text-amber-500">&lt;aside&gt;</code> — Sidebar content</div>
+                        <div><code class="text-amber-500">&lt;footer&gt;</code> — Page or section footer</div>
+                    </div>
+                </div>
+                <div class="bg-white border border-zinc-200 rounded-xl p-6">
+                    <div class="space-y-3 text-zinc-700">
+                        <div><code class="text-amber-500">&lt;div&gt;</code> — Block-level container</div>
+                        <div><code class="text-amber-500">&lt;span&gt;</code> — Inline container</div>
+                        <div><code class="text-amber-500">&lt;hr&gt;</code> — Thematic break</div>
+                        <div><code class="text-amber-500">&lt;br&gt;</code> — Line break</div>
+                        <div><code class="text-amber-500">&lt;figure&gt;</code> — Self-contained figure</div>
+                        <div><code class="text-amber-500">&lt;figcaption&gt;</code> — Caption for figure</div>
+                        <div><code class="text-amber-500">&lt;address&gt;</code> — Contact information</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-amber-500 text-xs font-bold tracking-widest uppercase mb-6">Link & Image Tags</h2>
+            <div class="bg-white border border-zinc-200 rounded-xl p-8 space-y-6">
+                <div>
+                    <code class="text-amber-500 text-sm">&lt;a href="..." target="_blank"&gt;</code>
+                    <p class="text-zinc-600 text-sm mt-1">Anchor tag — creates hyperlinks to pages, files, emails, or
+                        locations</p>
+                    <a href="#"
+                        class="inline-block mt-2 text-amber-500 underline underline-offset-2 text-sm hover:text-amber-600">Example
+                        Link →</a>
+                </div>
+                <div>
+                    <code class="text-amber-500 text-sm">&lt;img src="..." alt="..." width="..." height="..."&gt;</code>
+                    <p class="text-zinc-600 text-sm mt-1">Embeds an image. Always include alt attribute for
+                        accessibility.</p>
+                    <img src="https://res.cloudinary.com/dvytvjplt/image/upload/q_auto/f_auto/v1771170898/Gemini_Generated_Image_tugn9ttugn9ttugn_nhquza.png" alt="Placeholder image"
+                        class="mt-2 rounded-lg">
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-amber-500 text-xs font-bold tracking-widest uppercase mb-6">Blockquote & Details</h2>
+            <div class="space-y-4">
+                <blockquote class="border-l-4 border-amber-400 pl-6 py-2 bg-white border border-zinc-200 rounded-r-xl">
+                    <p class="text-zinc-700 italic">"The purpose of HTML is to structure content on the web — semantics
+                        first, presentation second."</p>
+                    <footer class="text-zinc-600 text-sm mt-2">— Web Standards Community</footer>
+                </blockquote>
+                <details class="bg-white border border-zinc-200 rounded-xl p-6">
+                    <summary class="cursor-pointer font-bold text-amber-500">Click to expand — &lt;details&gt; &amp;
+                        &lt;summary&gt; tags</summary>
+                    <p class="text-zinc-600 text-sm mt-4">This content was hidden inside a details element. The summary
+                        acts as a visible toggle. No JavaScript needed!</p>
+                </details>
+            </div>
+        </section>
+
+    </main>
+</body>
+
+</html>

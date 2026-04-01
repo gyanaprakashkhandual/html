@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Canvas API</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Space Grotesk", sans-serif;
+      }
+      code {
+        font-family: "JetBrains Mono", monospace;
+      }
+    </style>
+  </head>
+  <body class="bg-white text-gray-900 min-h-screen">
+    <header class="border-b border-gray-200 px-8 py-6">
+      <div class="max-w-6xl mx-auto flex items-center gap-4">
+        <span
+          class="bg-emerald-400 text-gray-950 text-xs font-bold px-2 py-1 rounded"
+          >ADVANCED</span
+        >
+        <h1 class="text-3xl font-bold tracking-tight">HTML Canvas API</h1>
+      </div>
+    </header>
+    <main class="max-w-6xl mx-auto px-8 py-12 space-y-16">
+      <section>
+        <h2
+          class="text-emerald-500 text-xs font-bold tracking-widest uppercase mb-6"
+        >
+          Shapes & Paths
+        </h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white border border-gray-200 rounded-xl p-4">
+            <canvas
+              id="shapesCanvas"
+              width="400"
+              height="250"
+              class="w-full rounded-lg bg-white"
+            ></canvas>
+            <p class="text-gray-600 text-xs mt-2">
+              Rectangles, circles, arcs, polygons
+            </p>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-xl p-4">
+            <canvas
+              id="pathsCanvas"
+              width="400"
+              height="250"
+              class="w-full rounded-lg bg-white"
+            ></canvas>
+            <p class="text-gray-600 text-xs mt-2">
+              Bezier curves, quadratic curves, complex paths
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2
+          class="text-emerald-500 text-xs font-bold tracking-widest uppercase mb-6"
+        >
+          Gradients & Shadows
+        </h2>
+        <div class="bg-white border border-gray-200 rounded-xl p-4">
+          <canvas
+            id="gradientsCanvas"
+            width="800"
+            height="200"
+            class="w-full rounded-lg bg-white"
+          ></canvas>
+        </div>
+      </section>
+
+      <section>
+        <h2
+          class="text-emerald-500 text-xs font-bold tracking-widest uppercase mb-6"
+        >
+          Text on Canvas
+        </h2>
+        <div class="bg-white border border-gray-200 rounded-xl p-4">
+          <canvas
+            id="textCanvas"
+            width="800"
+            height="200"
+            class="w-full rounded-lg bg-white"
+          ></canvas>
+        </div>
+      </section>
+
+      <section>
+        <h2
+          class="text-emerald-500 text-xs font-bold tracking-widest uppercase mb-6"
+        >
+          Transformations
+        </h2>
+        <div class="bg-white border border-gray-200 rounded-xl p-4">
+          <canvas
+            id="transformCanvas"
+            width="800"
+            height="250"
+            class="w-full rounded-lg bg-white"
+          ></canvas>
+        </div>
+      </section>
+
+      <section>
+        <h2
+          class="text-emerald-500 text-xs font-bold tracking-widest uppercase mb-6"
+        >
+          Interactive Drawing Board
+        </h2>
+        <div class="bg-white border border-gray-200 rounded-xl p-4">
+          <div class="flex gap-3 mb-3 flex-wrap">
+            <input
+              type="color"
+              id="drawColor"
+              value="#34d399"
+              class="h-9 w-16 rounded cursor-pointer bg-white border border-gray-300"
+            />
+            <input
+              type="range"
+              id="brushSize"
+              min="1"
+              max="40"
+              value="8"
+              class="accent-emerald-500 w-32"
+            />
+            <button
+              onclick="clearBoard()"
+              class="bg-gray-200 text-gray-900 px-4 py-2 rounded-lg text-sm font-bold hover:bg-gray-300 transition-colors"
+            >
+              Clear
+            </button>
+            <button
+              onclick="saveCanvas()"
+              class="bg-emerald-400 text-gray-950 px-4 py-2 rounded-lg text-sm font-bold hover:bg-emerald-300 transition-colors"
+            >
+              Save PNG
+            </button>
+            <label class="flex items-center gap-2 text-sm text-gray-600">
+              <input
+                type="checkbox"
+                id="eraserMode"
+                class="accent-emerald-500"
+              />
+              Eraser
+            </label>
+          </div>
+          <canvas
+            id="drawBoard"
+            width="800"
+            height="400"
+            class="w-full rounded-lg bg-white cursor-crosshair touch-none"
+          ></canvas>
+        </div>
+      </section>
+
+      <section>
+        <h2
+          class="text-emerald-500 text-xs font-bold tracking-widest uppercase mb-6"
+        >
+          Animation Loop (requestAnimationFrame)
+        </h2>
+        <div class="bg-white border border-gray-200 rounded-xl p-4">
+          <div class="flex gap-3 mb-3">
+            <button
+              id="animBtn"
+              onclick="toggleAnim()"
+              class="bg-emerald-400 text-gray-950 px-4 py-2 rounded-lg text-sm font-bold hover:bg-emerald-300 transition-colors"
+            >
+              Pause
+            </button>
+          </div>
+          <canvas
+            id="animCanvas"
+            width="800"
+            height="300"
+            class="w-full rounded-lg bg-white"
+          ></canvas>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        const dpr = window.devicePixelRatio || 1;
+
+        function scaleCanvas(canvas) {
+          const rect = canvas.getBoundingClientRect();
+          canvas.width = rect.width * dpr;
+          canvas.height = canvas.offsetHeight * dpr;
+          canvas.getContext("2d").scale(dpr, dpr);
+          canvas.style.width = rect.width + "px";
+          canvas.style.height = canvas.offsetHeight + "px";
+        }
+
+        const shapesC = document.getElementById("shapesCanvas");
+        const sCtx = shapesC.getContext("2d");
+        sCtx.fillStyle = "#34d399";
+        sCtx.fillRect(20, 20, 100, 70);
+        sCtx.strokeStyle = "#34d399";
+        sCtx.lineWidth = 3;
+        sCtx.strokeRect(140, 20, 100, 70);
+        sCtx.beginPath();
+        sCtx.arc(310, 55, 40, 0, Math.PI * 2);
+        sCtx.fillStyle = "#818cf8";
+        sCtx.fill();
+        sCtx.beginPath();
+        sCtx.moveTo(20, 130);
+        sCtx.lineTo(120, 130);
+        sCtx.lineTo(70, 200);
+        sCtx.closePath();
+        sCtx.fillStyle = "#f472b6";
+        sCtx.fill();
+        sCtx.beginPath();
+        for (let i = 0; i < 6; i++) {
+          const angle = (i * Math.PI * 2) / 6 - Math.PI / 6;
+          const x = 220 + 50 * Math.cos(angle),
+            y = 165 + 50 * Math.sin(angle);
+          if (i === 0) sCtx.moveTo(x, y);
+          else sCtx.lineTo(x, y);
+        }
+        sCtx.closePath();
+        sCtx.fillStyle = "#fbbf24";
+        sCtx.fill();
+        sCtx.beginPath();
+        sCtx.arc(330, 165, 45, 0, Math.PI);
+        sCtx.fillStyle = "#34d399";
+        sCtx.fill();
+
+        const pathC = document.getElementById("pathsCanvas");
+        const pCtx = pathC.getContext("2d");
+        pCtx.beginPath();
+        pCtx.moveTo(30, 200);
+        pCtx.bezierCurveTo(100, 20, 200, 220, 270, 80);
+        pCtx.strokeStyle = "#34d399";
+        pCtx.lineWidth = 3;
+        pCtx.stroke();
+        pCtx.beginPath();
+        pCtx.moveTo(30, 120);
+        pCtx.quadraticCurveTo(130, 20, 250, 120);
+        pCtx.strokeStyle = "#818cf8";
+        pCtx.lineWidth = 3;
+        pCtx.stroke();
+        pCtx.beginPath();
+        pCtx.arc(330, 80, 50, 0, Math.PI * 1.5);
+        pCtx.lineTo(330, 80);
+        pCtx.fillStyle = "#f472b680";
+        pCtx.fill();
+        pCtx.beginPath();
+        pCtx.arc(330, 180, 50, 0, Math.PI, true);
+        pCtx.lineTo(330, 180);
+        pCtx.fillStyle = "#fbbf2480";
+        pCtx.fill();
+        pCtx.setLineDash([10, 5]);
+        pCtx.beginPath();
+        pCtx.rect(20, 30, 60, 40);
+        pCtx.strokeStyle = "#94a3b8";
+        pCtx.lineWidth = 2;
+        pCtx.stroke();
+        pCtx.setLineDash([]);
+
+        const gC = document.getElementById("gradientsCanvas");
+        const gCtx = gC.getContext("2d");
+        const w = gC.offsetWidth || 800;
+        const linGrad = gCtx.createLinearGradient(0, 0, w * 0.3, 0);
+        linGrad.addColorStop(0, "#34d399");
+        linGrad.addColorStop(1, "#818cf8");
+        gCtx.fillStyle = linGrad;
+        gCtx.fillRect(20, 20, w * 0.3 - 30, 160);
+        const radGrad = gCtx.createRadialGradient(
+          w * 0.55,
+          100,
+          10,
+          w * 0.55,
+          100,
+          80,
+        );
+        radGrad.addColorStop(0, "#fbbf24");
+        radGrad.addColorStop(1, "#f4723800");
+        gCtx.fillStyle = radGrad;
+        gCtx.beginPath();
+        gCtx.arc(w * 0.55, 100, 80, 0, Math.PI * 2);
+        gCtx.fill();
+        gCtx.shadowColor = "#34d399";
+        gCtx.shadowBlur = 20;
+        gCtx.fillStyle = "#34d399";
+        gCtx.fillRect(w * 0.75, 40, 100, 120);
+        gCtx.shadowBlur = 0;
+
+        const tC = document.getElementById("textCanvas");
+        const tCtx = tC.getContext("2d");
+        tCtx.fillStyle = "#34d399";
+        tCtx.font = "bold 48px Space Grotesk, sans-serif";
+        tCtx.fillText("Hello Canvas", 20, 60);
+        tCtx.strokeStyle = "#818cf8";
+        tCtx.lineWidth = 2;
+        tCtx.font = "bold 48px Space Grotesk, sans-serif";
+        tCtx.strokeText("Stroke Text", 20, 130);
+        tCtx.fillStyle = "#94a3b8";
+        tCtx.font = "16px JetBrains Mono, monospace";
+        tCtx.textAlign = "right";
+        tCtx.fillText("textAlign: right", tC.offsetWidth - 20, 60);
+        tCtx.textAlign = "center";
+        tCtx.fillText("textAlign: center", tC.offsetWidth / 2, 130);
+
+        const trC = document.getElementById("transformCanvas");
+        const trCtx = trC.getContext("2d");
+        const colors = ["#34d399", "#818cf8", "#f472b6", "#fbbf24"];
+        for (let i = 0; i < 4; i++) {
+          trCtx.save();
+          trCtx.translate(100 + i * 170, 125);
+          trCtx.rotate((i * Math.PI) / 8);
+          trCtx.scale(1 + i * 0.15, 1 + i * 0.15);
+          trCtx.fillStyle = colors[i];
+          trCtx.fillRect(-40, -40, 80, 80);
+          trCtx.restore();
+        }
+
+        const board = document.getElementById("drawBoard");
+        const bCtx = board.getContext("2d");
+        let drawing = false,
+          lastX = 0,
+          lastY = 0;
+        function getPos(e) {
+          const r = board.getBoundingClientRect();
+          const src = e.touches ? e.touches[0] : e;
+          return [
+            (src.clientX - r.left) * (board.width / r.width),
+            (src.clientY - r.top) * (board.height / r.height),
+          ];
+        }
+        function startDraw(e) {
+          drawing = true;
+          [lastX, lastY] = getPos(e);
+        }
+        function draw(e) {
+          if (!drawing) return;
+          e.preventDefault();
+          const [x, y] = getPos(e);
+          bCtx.beginPath();
+          const eraser = document.getElementById("eraserMode").checked;
+          bCtx.globalCompositeOperation = eraser
+            ? "destination-out"
+            : "source-over";
+          bCtx.strokeStyle = eraser
+            ? "rgba(0,0,0,1)"
+            : document.getElementById("drawColor").value;
+          bCtx.lineWidth = document.getElementById("brushSize").value;
+          bCtx.lineCap = "round";
+          bCtx.lineJoin = "round";
+          bCtx.moveTo(lastX, lastY);
+          bCtx.lineTo(x, y);
+          bCtx.stroke();
+          [lastX, lastY] = [x, y];
+        }
+        function stopDraw() {
+          drawing = false;
+        }
+        board.addEventListener("mousedown", startDraw);
+        board.addEventListener("mousemove", draw);
+        board.addEventListener("mouseup", stopDraw);
+        board.addEventListener("mouseleave", stopDraw);
+        board.addEventListener("touchstart", startDraw);
+        board.addEventListener("touchmove", draw);
+        board.addEventListener("touchend", stopDraw);
+        window.clearBoard = () => {
+          bCtx.clearRect(0, 0, board.width, board.height);
+          bCtx.globalCompositeOperation = "source-over";
+        };
+        window.saveCanvas = () => {
+          const a = document.createElement("a");
+          a.href = board.toDataURL();
+          a.download = "drawing.png";
+          a.click();
+        };
+
+        const animC = document.getElementById("animCanvas");
+        const aCtx = animC.getContext("2d");
+        const aW = animC.offsetWidth || 800,
+          aH = 300;
+        const balls = Array.from({ length: 8 }, (_, i) => ({
+          x: Math.random() * aW,
+          y: Math.random() * aH,
+          vx: (Math.random() - 0.5) * 4,
+          vy: (Math.random() - 0.5) * 4,
+          r: 15 + Math.random() * 30,
+          color: ["#34d399", "#818cf8", "#f472b6", "#fbbf24", "#60a5fa"][
+            Math.floor(Math.random() * 5)
+          ],
+        }));
+        let animRunning = true,
+          rafId;
+        function animFrame(t) {
+          aCtx.fillStyle = "rgba(255,255,255,0.2)";
+          aCtx.fillRect(0, 0, aW, aH);
+          balls.forEach((b) => {
+            b.x += b.vx;
+            b.y += b.vy;
+            if (b.x < b.r || b.x > aW - b.r) b.vx *= -1;
+            if (b.y < b.r || b.y > aH - b.r) b.vy *= -1;
+            const grad = aCtx.createRadialGradient(
+              b.x - b.r * 0.3,
+              b.y - b.r * 0.3,
+              2,
+              b.x,
+              b.y,
+              b.r,
+            );
+            grad.addColorStop(0, "#fff");
+            grad.addColorStop(0.3, b.color);
+            grad.addColorStop(1, b.color + "40");
+            aCtx.beginPath();
+            aCtx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+            aCtx.fillStyle = grad;
+            aCtx.fill();
+          });
+          if (animRunning) rafId = requestAnimationFrame(animFrame);
+        }
+        rafId = requestAnimationFrame(animFrame);
+        window.toggleAnim = () => {
+          animRunning = !animRunning;
+          document.getElementById("animBtn").textContent = animRunning
+            ? "Pause"
+            : "Play";
+          if (animRunning) rafId = requestAnimationFrame(animFrame);
+          else cancelAnimationFrame(rafId);
+        };
+      })();
+    </script>
+  </body>
+</html>

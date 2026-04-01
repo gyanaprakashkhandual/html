@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Performance</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preload" as="style" href="https://cdn.tailwindcss.com" />
+    <style>
+      body {
+        font-family: "Outfit", sans-serif;
+      }
+      code {
+        font-family: "JetBrains Mono", monospace;
+      }
+    </style>
+  </head>
+  <body class="bg-white text-zinc-900 min-h-screen">
+    <header class="border-b border-zinc-200 px-8 py-6">
+      <div class="max-w-5xl mx-auto flex items-center gap-4">
+        <span class="bg-rose-500 text-white text-xs font-bold px-2 py-1 rounded"
+          >SUPER ADVANCED</span
+        >
+        <h1 class="text-3xl font-black">HTML Performance</h1>
+      </div>
+    </header>
+    <main class="max-w-5xl mx-auto px-8 py-12 space-y-12">
+      <section class="bg-white border border-zinc-200 rounded-xl p-8">
+        <h2 class="text-rose-500 font-bold mb-6">Resource Hints</h2>
+        <div class="space-y-4 text-sm font-mono">
+          <div class="bg-zinc-100 rounded-lg p-4">
+            <div class="text-rose-500 font-bold mb-1">dns-prefetch</div>
+            <code class="text-zinc-800"
+              >&lt;link rel="dns-prefetch" href="//api.example.com"&gt;</code
+            >
+            <p class="text-zinc-600 mt-1 font-sans">
+              Resolves DNS early for third-party origins — saves ~100–300ms
+            </p>
+          </div>
+          <div class="bg-zinc-100 rounded-lg p-4">
+            <div class="text-rose-500 font-bold mb-1">preconnect</div>
+            <code class="text-zinc-800"
+              >&lt;link rel="preconnect"
+              href="https://fonts.googleapis.com"&gt;</code
+            >
+            <p class="text-zinc-600 mt-1 font-sans">
+              DNS + TCP + TLS handshake early. Use for critical third-party
+              origins.
+            </p>
+          </div>
+          <div class="bg-zinc-100 rounded-lg p-4">
+            <div class="text-rose-500 font-bold mb-1">preload</div>
+            <code class="text-zinc-800"
+              >&lt;link rel="preload" as="font" href="font.woff2"
+              crossorigin&gt;</code
+            >
+            <p class="text-zinc-600 mt-1 font-sans">
+              High-priority fetch for critical resources used in current page.
+            </p>
+          </div>
+          <div class="bg-zinc-100 rounded-lg p-4">
+            <div class="text-rose-500 font-bold mb-1">prefetch</div>
+            <code class="text-zinc-800"
+              >&lt;link rel="prefetch" href="/next-page.js"&gt;</code
+            >
+            <p class="text-zinc-600 mt-1 font-sans">
+              Low-priority fetch for likely next navigation. Cached for future
+              use.
+            </p>
+          </div>
+          <div class="bg-zinc-100 rounded-lg p-4">
+            <div class="text-rose-500 font-bold mb-1">modulepreload</div>
+            <code class="text-zinc-800"
+              >&lt;link rel="modulepreload" href="/app.js"&gt;</code
+            >
+            <p class="text-zinc-600 mt-1 font-sans">
+              Preloads ES modules including dependency graph parsing.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-white border border-zinc-200 rounded-xl p-8">
+        <h2 class="text-rose-500 font-bold mb-6">Script Loading Strategies</h2>
+        <div class="grid md:grid-cols-3 gap-4 text-sm">
+          <div class="bg-zinc-100 rounded-xl p-5 space-y-3">
+            <div class="text-rose-500 font-bold text-base">Normal</div>
+            <code class="text-zinc-800 text-xs block"
+              >&lt;script src="app.js"&gt;&lt;/script&gt;</code
+            >
+            <div class="bg-white border border-zinc-200 rounded-lg p-3">
+              <div class="flex gap-1 mb-1">
+                <div
+                  class="h-3 bg-blue-500 rounded flex-1"
+                  title="Parse HTML"
+                ></div>
+                <div
+                  class="h-3 bg-red-500 rounded w-12"
+                  title="Script blocks parsing"
+                ></div>
+                <div
+                  class="h-3 bg-blue-500 rounded flex-1"
+                  title="Parse HTML resumes"
+                ></div>
+              </div>
+              <div class="text-zinc-500 text-xs">HTML → BLOCK → Resume</div>
+            </div>
+            <p class="text-zinc-600 text-xs">
+              Blocks HTML parsing while fetching and executing. Avoid for
+              non-critical scripts.
+            </p>
+          </div>
+          <div class="bg-zinc-100 rounded-xl p-5 space-y-3">
+            <div class="text-rose-500 font-bold text-base">async</div>
+            <code class="text-zinc-800 text-xs block"
+              >&lt;script async src="app.js"&gt;&lt;/script&gt;</code
+            >
+            <div class="bg-white border border-zinc-200 rounded-lg p-3">
+              <div class="flex gap-1 mb-1 items-center">
+                <div
+                  class="h-3 bg-blue-500 rounded flex-1"
+                  title="Parse HTML"
+                ></div>
+                <div
+                  class="h-3 bg-red-500 rounded w-8 -ml-4"
+                  title="Execute"
+                ></div>
+              </div>
+              <div class="text-zinc-500 text-xs">
+                Fetch parallel → execute ASAP
+              </div>
+            </div>
+            <p class="text-zinc-600 text-xs">
+              Fetches in parallel, executes as soon as downloaded (may interrupt
+              parsing). Good for analytics.
+            </p>
+          </div>
+          <div class="bg-zinc-100 rounded-xl p-5 space-y-3">
+            <div class="text-rose-500 font-bold text-base">defer</div>
+            <code class="text-zinc-800 text-xs block"
+              >&lt;script defer src="app.js"&gt;&lt;/script&gt;</code
+            >
+            <div class="bg-white border border-zinc-200 rounded-lg p-3">
+              <div class="flex gap-1 mb-1 items-center">
+                <div
+                  class="h-3 bg-blue-500 rounded flex-1"
+                  title="Parse HTML"
+                ></div>
+                <div
+                  class="h-3 bg-green-500 rounded w-8"
+                  title="Execute after DOM"
+                ></div>
+              </div>
+              <div class="text-zinc-500 text-xs">
+                Fetch parallel → execute after DOM
+              </div>
+            </div>
+            <p class="text-zinc-600 text-xs">
+              Fetches in parallel, executes after DOM is ready. Preserves order.
+              Best for most scripts.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-white border border-zinc-200 rounded-xl p-8">
+        <h2 class="text-rose-500 font-bold mb-6">Image Performance</h2>
+        <div class="space-y-4 text-sm">
+          <div class="bg-zinc-100 rounded-lg p-4">
+            <div class="text-rose-500 font-bold mb-2">Lazy Loading</div>
+            <code class="text-zinc-800"
+              >&lt;img loading="lazy" src="image.jpg" alt="..."&gt;</code
+            >
+            <p class="text-zinc-600 mt-1">
+              Browser-native lazy loading — don't load off-screen images until
+              needed
+            </p>
+          </div>
+          <div class="bg-zinc-100 rounded-lg p-4">
+            <div class="text-rose-500 font-bold mb-2">fetchpriority</div>
+            <code class="text-zinc-800"
+              >&lt;img fetchpriority="high" src="hero.jpg" alt="..."&gt;
+              <span class="text-zinc-500">// LCP image</span></code
+            >
+            <p class="text-zinc-600 mt-1">
+              Hint browser to prioritize LCP image fetch — improves Core Web
+              Vitals
+            </p>
+          </div>
+          <div class="bg-zinc-100 rounded-lg p-4">
+            <div class="text-rose-500 font-bold mb-2">srcset & sizes</div>
+            <code class="text-zinc-800 block"
+              >&lt;img<br />&nbsp;&nbsp;srcset="img-320.jpg 320w, img-640.jpg
+              640w, img-1280.jpg 1280w"<br />&nbsp;&nbsp;sizes="(max-width:
+              600px) 320px, (max-width: 1200px) 640px, 1280px"<br />&nbsp;&nbsp;src="img-640.jpg"
+              alt="Responsive"&gt;</code
+            >
+            <p class="text-zinc-600 mt-1">
+              Browser picks optimal image based on screen DPI and viewport
+            </p>
+          </div>
+          <div class="bg-zinc-100 rounded-lg p-4">
+            <div class="text-rose-500 font-bold mb-2">decoding="async"</div>
+            <code class="text-zinc-800"
+              >&lt;img decoding="async" src="image.jpg" alt="..."&gt;</code
+            >
+            <p class="text-zinc-600 mt-1">
+              Decode image off main thread — prevents jank during page load
+            </p>
+          </div>
+          <div class="grid md:grid-cols-2 gap-3 mt-4">
+            <div class="bg-white border border-zinc-200 rounded-lg p-3">
+              <div class="text-zinc-500 font-bold text-xs mb-2">
+                width + height = No CLS
+              </div>
+              <code class="text-zinc-600 text-xs"
+                >&lt;img width="400" height="300" ...&gt;</code
+              >
+              <p class="text-zinc-600 text-xs mt-1">
+                Browser reserves space before image loads — prevents Cumulative
+                Layout Shift
+              </p>
+            </div>
+            <div class="bg-white border border-zinc-200 rounded-lg p-3">
+              <div class="text-zinc-500 font-bold text-xs mb-2">
+                format="avif/webp"
+              </div>
+              <code class="text-zinc-600 text-xs"
+                >&lt;source type="image/avif" srcset="img.avif"&gt;</code
+              >
+              <p class="text-zinc-600 text-xs mt-1">
+                AVIF = 50% smaller than JPEG. Use picture for format
+                negotiation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-white border border-zinc-200 rounded-xl p-8">
+        <h2 class="text-rose-500 font-bold mb-6">
+          Navigation Timing API — Live Metrics
+        </h2>
+        <div id="perfMetrics" class="grid md:grid-cols-2 gap-4 text-sm"></div>
+        <script>
+          window.addEventListener("load", () => {
+            const nav = performance.getEntriesByType("navigation")[0];
+            const paint = performance.getEntriesByType("paint");
+            const metrics = [
+              {
+                label: "DNS Lookup",
+                value:
+                  (nav.domainLookupEnd - nav.domainLookupStart).toFixed(1) +
+                  "ms",
+                color: "#f43f5e",
+              },
+              {
+                label: "TCP Connect",
+                value: (nav.connectEnd - nav.connectStart).toFixed(1) + "ms",
+                color: "#fb923c",
+              },
+              {
+                label: "Request Time",
+                value: (nav.responseStart - nav.requestStart).toFixed(1) + "ms",
+                color: "#fbbf24",
+              },
+              {
+                label: "Response Time",
+                value: (nav.responseEnd - nav.responseStart).toFixed(1) + "ms",
+                color: "#4ade80",
+              },
+              {
+                label: "DOM Parse",
+                value:
+                  (nav.domContentLoadedEventStart - nav.responseEnd).toFixed(
+                    1,
+                  ) + "ms",
+                color: "#60a5fa",
+              },
+              {
+                label: "Load Complete",
+                value: (nav.loadEventEnd - nav.startTime).toFixed(1) + "ms",
+                color: "#818cf8",
+              },
+              {
+                label: "FP (First Paint)",
+                value:
+                  (
+                    paint.find((p) => p.name === "first-paint")?.startTime || 0
+                  ).toFixed(1) + "ms",
+                color: "#f472b6",
+              },
+              {
+                label: "FCP",
+                value:
+                  (
+                    paint.find((p) => p.name === "first-contentful-paint")
+                      ?.startTime || 0
+                  ).toFixed(1) + "ms",
+                color: "#a78bfa",
+              },
+            ];
+            const container = document.getElementById("perfMetrics");
+            metrics.forEach((m) => {
+              container.innerHTML += `<div class="bg-zinc-100 border border-zinc-200 rounded-xl p-4 flex items-center gap-3">
+            <div style="width:4px;height:40px;background:${m.color};border-radius:2px;flex-shrink:0"></div>
+            <div><div class="text-zinc-500 text-xs">${m.label}</div><div style="color:${m.color};font-weight:700;font-size:1.1rem">${m.value}</div></div>
+          </div>`;
+            });
+          });
+        </script>
+      </section>
+
+      <section class="bg-white border border-zinc-200 rounded-xl p-8">
+        <h2 class="text-rose-500 font-bold mb-6">
+          Content Security Policy & Meta Tags
+        </h2>
+        <div class="space-y-3 text-sm font-mono">
+          <div class="bg-zinc-100 rounded-lg p-4">
+            <code class="text-zinc-800 block"
+              >&lt;meta http-equiv="Content-Security-Policy"<br />&nbsp;&nbsp;content="default-src
+              'self'; script-src 'self' 'nonce-ABC123'; style-src 'self'
+              fonts.googleapis.com"&gt;</code
+            >
+            <p class="text-zinc-600 mt-2 font-sans text-xs">
+              CSP prevents XSS — restrict which scripts and resources can load
+              on your page
+            </p>
+          </div>
+          <div class="bg-zinc-100 rounded-lg p-4">
+            <code class="text-zinc-800"
+              >&lt;meta name="referrer"
+              content="no-referrer-when-downgrade"&gt;</code
+            >
+            <p class="text-zinc-600 mt-1 font-sans text-xs">
+              Controls how much referrer info is sent in requests
+            </p>
+          </div>
+          <div class="bg-zinc-100 rounded-lg p-4">
+            <code class="text-zinc-800"
+              >&lt;meta name="robots" content="index, follow,
+              max-image-preview:large"&gt;</code
+            >
+            <p class="text-zinc-600 mt-1 font-sans text-xs">
+              Controls crawler behavior — index, noindex, follow, nofollow
+            </p>
+          </div>
+          <div class="bg-zinc-100 rounded-lg p-4">
+            <code class="text-zinc-800"
+              >&lt;meta name="theme-color" content="#f43f5e"
+              media="(prefers-color-scheme: light)"&gt;</code
+            >
+            <p class="text-zinc-600 mt-1 font-sans text-xs">
+              Browser UI color — shown in mobile browser chrome and PWA
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

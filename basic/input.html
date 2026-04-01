@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Inputs</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Syne", sans-serif;
+      }
+      code {
+        font-family: "JetBrains Mono", monospace;
+      }
+    </style>
+  </head>
+  <body class="bg-white text-zinc-900 min-h-screen">
+    <header class="border-b border-zinc-200 px-8 py-6">
+      <div class="max-w-5xl mx-auto flex items-center gap-4">
+        <span
+          class="bg-amber-400 text-zinc-950 text-xs font-bold px-2 py-1 rounded"
+          >BASIC</span
+        >
+        <h1 class="text-3xl font-extrabold tracking-tight">HTML Input Types</h1>
+      </div>
+    </header>
+    <main class="max-w-5xl mx-auto px-8 py-12">
+      <form class="space-y-12" onsubmit="return false;">
+        <section>
+          <h2
+            class="text-amber-500 text-xs font-bold tracking-widest uppercase mb-6"
+          >
+            Text-Based Inputs
+          </h2>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div
+              class="bg-white border border-zinc-200 rounded-xl p-6 space-y-2"
+            >
+              <code class="text-amber-500 text-xs">type="text"</code>
+              <label class="block text-sm text-zinc-600">Full Name</label>
+              <input
+                type="text"
+                placeholder="John Doe"
+                class="w-full bg-white border border-zinc-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-amber-500"
+              />
+            </div>
+            <div
+              class="bg-white border border-zinc-200 rounded-xl p-6 space-y-2"
+            >
+              <code class="text-amber-500 text-xs">type="email"</code>
+              <label class="block text-sm text-zinc-600">Email Address</label>
+              <input
+                type="email"
+                placeholder="john@example.com"
+                class="w-full bg-white border border-zinc-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-amber-500"
+              />
+            </div>
+            <div
+              class="bg-white border border-zinc-200 rounded-xl p-6 space-y-2"
+            >
+              <code class="text-amber-500 text-xs">type="password"</code>
+              <label class="block text-sm text-zinc-600">Password</label>
+              <input
+                type="password"
+                placeholder="••••••••"
+                class="w-full bg-white border border-zinc-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-amber-500"
+              />
+            </div>
+            <div
+              class="bg-white border border-zinc-200 rounded-xl p-6 space-y-2"
+            >
+              <code class="text-amber-500 text-xs">type="search"</code>
+              <label class="block text-sm text-zinc-600">Search</label>
+              <input
+                type="search"
+                placeholder="Search anything..."
+                class="w-full bg-white border border-zinc-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-amber-500"
+              />
+            </div>
+            <div
+              class="bg-white border border-zinc-200 rounded-xl p-6 space-y-2"
+            >
+              <code class="text-amber-500 text-xs">type="tel"</code>
+              <label class="block text-sm text-zinc-600">Phone Number</label>
+              <input
+                type="tel"
+                placeholder="+91 98765 43210"
+                class="w-full bg-white border border-zinc-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-amber-500"
+              />
+            </div>
+            <div
+              class="bg-white border border-zinc-200 rounded-xl p-6 space-y-2"
+            >
+              <code class="text-amber-500 text-xs">type="url"</code>
+              <label class="block text-sm text-zinc-600">Website URL</label>
+              <input
+                type="url"
+                placeholder="https://example.com"
+                class="w-full bg-white border border-zinc-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-amber-500"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2
+            class="text-amber-500 text-xs font-bold tracking-widest uppercase mb-6"
+          >
+            Numeric Inputs
+          </h2>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div
+              class="bg-white border border-zinc-200 rounded-xl p-6 space-y-2"
+            >
+              <code class="text-amber-500 text-xs">type="number"</code>
+              <label class="block text-sm text-zinc-600"
+                >Quantity (1–100)</label
+              >
+              <input
+                type="number"
+                min="1"
+                max="100"
+                value="10"
+                class="w-full bg-white border border-zinc-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-amber-500"
+              />
+            </div>
+            <div
+              class="bg-white border border-zinc-200 rounded-xl p-6 space-y-2"
+            >
+              <code class="text-amber-500 text-xs">type="range"</code>
+              <label class="block text-sm text-zinc-600"
+                >Volume: <span id="rangeVal">50</span>%</label
+              >
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="50"
+                oninput="
+                  document.getElementById('rangeVal').textContent = this.value
+                "
+                class="w-full accent-amber-500"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2
+            class="text-amber-500 text-xs font-bold tracking-widest uppercase mb-6"
+          >
+            Date & Time Inputs
+          </h2>
+          <div class="grid md:grid-cols-3 gap-6">
+            <div
+              class="bg-white border border-zinc-200 rounded-xl p-6 space-y-2"
+            >
+              <code class="text-amber-500 text-xs">type="date"</code>
+              <input
+                type="date"
+                class="w-full bg-white border border-zinc-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-amber-500"
+              />
+            </div>
+            <div
+              class="bg-white border border-zinc-200 rounded-xl p-6 space-y-2"
+            >
+              <code class="text-amber-500 text-xs">type="time"</code>
+              <input
+                type="time"
+                class="w-full bg-white border border-zinc-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-amber-500"
+              />
+            </div>
+            <div
+              class="bg-white border border-zinc-200 rounded-xl p-6 space-y-2"
+            >
+              <code class="text-amber-500 text-xs">type="datetime-local"</code>
+              <input
+                type="datetime-local"
+                class="w-full bg-white border border-zinc-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-amber-500"
+              />
+            </div>
+            <div
+              class="bg-white border border-zinc-200 rounded-xl p-6 space-y-2"
+            >
+              <code class="text-amber-500 text-xs">type="month"</code>
+              <input
+                type="month"
+                class="w-full bg-white border border-zinc-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-amber-500"
+              />
+            </div>
+            <div
+              class="bg-white border border-zinc-200 rounded-xl p-6 space-y-2"
+            >
+              <code class="text-amber-500 text-xs">type="week"</code>
+              <input
+                type="week"
+                class="w-full bg-white border border-zinc-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-amber-500"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2
+            class="text-amber-500 text-xs font-bold tracking-widest uppercase mb-6"
+          >
+            Choice Inputs
+          </h2>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div
+              class="bg-white border border-zinc-200 rounded-xl p-6 space-y-4"
+            >
+              <code class="text-amber-500 text-xs">type="checkbox"</code>
+              <div class="space-y-2">
+                <label
+                  class="flex items-center gap-3 text-sm text-zinc-700 cursor-pointer"
+                >
+                  <input
+                    type="checkbox"
+                    checked
+                    class="accent-amber-500 w-4 h-4"
+                  />
+                  HTML
+                </label>
+                <label
+                  class="flex items-center gap-3 text-sm text-zinc-700 cursor-pointer"
+                >
+                  <input type="checkbox" class="accent-amber-500 w-4 h-4" /> CSS
+                </label>
+                <label
+                  class="flex items-center gap-3 text-sm text-zinc-700 cursor-pointer"
+                >
+                  <input type="checkbox" class="accent-amber-500 w-4 h-4" />
+                  JavaScript
+                </label>
+              </div>
+            </div>
+            <div
+              class="bg-white border border-zinc-200 rounded-xl p-6 space-y-4"
+            >
+              <code class="text-amber-500 text-xs">type="radio"</code>
+              <div class="space-y-2">
+                <label
+                  class="flex items-center gap-3 text-sm text-zinc-700 cursor-pointer"
+                >
+                  <input
+                    type="radio"
+                    name="level"
+                    checked
+                    class="accent-amber-500 w-4 h-4"
+                  />
+                  Beginner
+                </label>
+                <label
+                  class="flex items-center gap-3 text-sm text-zinc-700 cursor-pointer"
+                >
+                  <input
+                    type="radio"
+                    name="level"
+                    class="accent-amber-500 w-4 h-4"
+                  />
+                  Intermediate
+                </label>
+                <label
+                  class="flex items-center gap-3 text-sm text-zinc-700 cursor-pointer"
+                >
+                  <input
+                    type="radio"
+                    name="level"
+                    class="accent-amber-500 w-4 h-4"
+                  />
+                  Expert
+                </label>
+              </div>
+            </div>
+            <div
+              class="bg-white border border-zinc-200 rounded-xl p-6 space-y-2"
+            >
+              <code class="text-amber-500 text-xs">type="color"</code>
+              <label class="block text-sm text-zinc-600">Pick a color</label>
+              <input
+                type="color"
+                value="#f59e0b"
+                class="h-10 w-24 rounded cursor-pointer bg-white border border-zinc-300"
+              />
+            </div>
+            <div
+              class="bg-white border border-zinc-200 rounded-xl p-6 space-y-2"
+            >
+              <code class="text-amber-500 text-xs">type="file"</code>
+              <label class="block text-sm text-zinc-600">Upload a file</label>
+              <input
+                type="file"
+                class="w-full text-sm text-zinc-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-amber-400 file:text-zinc-950 file:font-bold cursor-pointer"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2
+            class="text-amber-500 text-xs font-bold tracking-widest uppercase mb-6"
+          >
+            Textarea & Select
+          </h2>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div
+              class="bg-white border border-zinc-200 rounded-xl p-6 space-y-2"
+            >
+              <code class="text-amber-500 text-xs">&lt;textarea&gt;</code>
+              <label class="block text-sm text-zinc-600">Your Message</label>
+              <textarea
+                rows="5"
+                placeholder="Type your message here..."
+                class="w-full bg-white border border-zinc-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-amber-500 resize-none"
+              ></textarea>
+            </div>
+            <div
+              class="bg-white border border-zinc-200 rounded-xl p-6 space-y-2"
+            >
+              <code class="text-amber-500 text-xs"
+                >&lt;select&gt; &amp; &lt;optgroup&gt;</code
+              >
+              <label class="block text-sm text-zinc-600">Choose Country</label>
+              <select
+                class="w-full bg-white border border-zinc-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-amber-500"
+              >
+                <optgroup label="Asia">
+                  <option>India</option>
+                  <option>Japan</option>
+                </optgroup>
+                <optgroup label="Europe">
+                  <option>Germany</option>
+                  <option>France</option>
+                </optgroup>
+              </select>
+              <code class="text-amber-500 text-xs mt-4 block"
+                >&lt;datalist&gt;</code
+              >
+              <label class="block text-sm text-zinc-600"
+                >Browser with autocomplete</label
+              >
+              <input
+                list="browsers"
+                placeholder="Start typing..."
+                class="w-full bg-white border border-zinc-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-amber-500"
+              />
+              <datalist id="browsers">
+                <option value="Chrome"></option>
+                <option value="Firefox"></option>
+                <option value="Safari"></option>
+                <option value="Edge"></option>
+              </datalist>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2
+            class="text-amber-500 text-xs font-bold tracking-widest uppercase mb-6"
+          >
+            Button Types
+          </h2>
+          <div
+            class="bg-white border border-zinc-200 rounded-xl p-8 flex flex-wrap gap-4"
+          >
+            <button
+              type="submit"
+              class="bg-amber-400 text-zinc-950 font-bold px-6 py-2 rounded-lg hover:bg-amber-300 transition-colors"
+            >
+              type="submit"
+            </button>
+            <button
+              type="reset"
+              class="bg-zinc-200 text-zinc-900 font-bold px-6 py-2 rounded-lg hover:bg-zinc-300 transition-colors"
+            >
+              type="reset"
+            </button>
+            <button
+              type="button"
+              class="border border-zinc-300 text-zinc-700 font-bold px-6 py-2 rounded-lg hover:border-amber-400 hover:text-amber-500 transition-colors"
+            >
+              type="button"
+            </button>
+            <input
+              type="submit"
+              value="input submit"
+              class="bg-amber-400 text-zinc-950 font-bold px-6 py-2 rounded-lg cursor-pointer hover:bg-amber-300 transition-colors"
+            />
+            <input
+              type="image"
+              src="https://via.placeholder.com/80x36/f59e0b/171717?text=img+btn"
+              alt="image button"
+              class="rounded-lg"
+            />
+          </div>
+        </section>
+
+        <section>
+          <h2
+            class="text-amber-500 text-xs font-bold tracking-widest uppercase mb-6"
+          >
+            Input Attributes Demo
+          </h2>
+          <div class="grid md:grid-cols-2 gap-6 text-sm">
+            <div
+              class="bg-white border border-zinc-200 rounded-xl p-6 space-y-3"
+            >
+              <div>
+                <code class="text-amber-500">required</code> —
+                <input
+                  type="text"
+                  required
+                  placeholder="Cannot be empty"
+                  class="ml-2 bg-white border border-zinc-300 rounded px-3 py-1 text-sm focus:outline-none focus:border-amber-500"
+                />
+              </div>
+              <div>
+                <code class="text-amber-500">readonly</code> —
+                <input
+                  type="text"
+                  readonly
+                  value="Cannot edit me"
+                  class="ml-2 bg-white border border-zinc-300 rounded px-3 py-1 text-sm opacity-75 cursor-not-allowed"
+                />
+              </div>
+              <div>
+                <code class="text-amber-500">disabled</code> —
+                <input
+                  type="text"
+                  disabled
+                  placeholder="Disabled"
+                  class="ml-2 bg-white border border-zinc-300 rounded px-3 py-1 text-sm opacity-50 cursor-not-allowed"
+                />
+              </div>
+            </div>
+            <div
+              class="bg-white border border-zinc-200 rounded-xl p-6 space-y-3"
+            >
+              <div>
+                <code class="text-amber-500">maxlength="10"</code> —
+                <input
+                  type="text"
+                  maxlength="10"
+                  placeholder="Max 10 chars"
+                  class="ml-2 bg-white border border-zinc-300 rounded px-3 py-1 text-sm focus:outline-none focus:border-amber-500"
+                />
+              </div>
+              <div>
+                <code class="text-amber-500">pattern</code> —
+                <input
+                  type="text"
+                  pattern="[A-Za-z]{3}"
+                  placeholder="3 letters only"
+                  class="ml-2 bg-white border border-zinc-300 rounded px-3 py-1 text-sm focus:outline-none focus:border-amber-500"
+                />
+              </div>
+              <div>
+                <code class="text-amber-500">autocomplete</code> —
+                <input
+                  type="email"
+                  autocomplete="email"
+                  placeholder="autocomplete=email"
+                  class="ml-2 bg-white border border-zinc-300 rounded px-3 py-1 text-sm focus:outline-none focus:border-amber-500"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+      </form>
+    </main>
+  </body>
+</html>

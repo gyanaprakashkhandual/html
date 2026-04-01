@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Semantics</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+      article p {
+        font-family: "Merriweather", serif;
+      }
+      code {
+        font-family: monospace;
+      }
+    </style>
+  </head>
+  <body class="bg-white text-slate-900 min-h-screen">
+    <header
+      class="border-b border-slate-200 px-8 py-6 sticky top-0 bg-white/95 backdrop-blur-sm z-10"
+    >
+      <div class="max-w-6xl mx-auto flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <span
+            class="bg-violet-500 text-white text-xs font-bold px-2 py-1 rounded"
+            >INTERMEDIATE</span
+          >
+          <span class="font-bold text-lg">SemanticNews</span>
+        </div>
+        <nav aria-label="Main navigation">
+          <ul class="flex gap-6 text-sm text-slate-600">
+            <li>
+              <a href="#" class="hover:text-violet-600 transition-colors"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a href="#" class="hover:text-violet-600 transition-colors"
+                >Tech</a
+              >
+            </li>
+            <li>
+              <a href="#" class="hover:text-violet-600 transition-colors"
+                >Science</a
+              >
+            </li>
+            <li>
+              <a href="#" class="hover:text-violet-600 transition-colors"
+                >About</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="max-w-6xl mx-auto px-8 py-12">
+      <div class="mb-8 p-4 bg-violet-100 border border-violet-200 rounded-xl">
+        <p class="text-violet-700 text-sm">
+          This page demonstrates semantic HTML structure — view source to see
+          <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>,
+          <code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>,
+          <code>&lt;aside&gt;</code>, <code>&lt;section&gt;</code>,
+          <code>&lt;footer&gt;</code>, <code>&lt;time&gt;</code>,
+          <code>&lt;address&gt;</code>, and more.
+        </p>
+      </div>
+
+      <div class="flex gap-8">
+        <main class="flex-1 space-y-12">
+          <article
+            class="bg-white border border-slate-200 rounded-2xl overflow-hidden"
+          >
+            <img
+              src="https://picsum.photos/seed/sem1/800/300"
+              alt="Web Standards article"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-8">
+              <header class="mb-6">
+                <div class="flex items-center gap-2 mb-3">
+                  <span
+                    class="bg-violet-100 text-violet-700 text-xs font-bold px-2 py-1 rounded"
+                    >TECHNOLOGY</span
+                  >
+                </div>
+                <h1 class="text-2xl font-extrabold leading-tight mb-3">
+                  Why Semantic HTML Matters More Than Ever in 2025
+                </h1>
+                <div class="flex items-center gap-4 text-sm text-slate-600">
+                  <address class="not-italic">
+                    By
+                    <a
+                      rel="author"
+                      href="#"
+                      class="text-violet-600 hover:underline"
+                      >Priya Sharma</a
+                    >
+                  </address>
+                  <time datetime="2025-03-15">March 15, 2025</time>
+                  <span>8 min read</span>
+                </div>
+              </header>
+
+              <section aria-label="Article introduction">
+                <p class="text-slate-700 leading-relaxed mb-4">
+                  Semantic HTML is the backbone of accessible, SEO-friendly web
+                  development. When you choose
+                  <code class="bg-slate-100 px-1 rounded text-violet-700"
+                    >&lt;article&gt;</code
+                  >
+                  over
+                  <code class="bg-slate-100 px-1 rounded text-violet-700"
+                    >&lt;div&gt;</code
+                  >, you communicate meaning to browsers, screen readers, and
+                  search engines alike.
+                </p>
+                <p class="text-slate-700 leading-relaxed">
+                  The difference between a meaningfully structured document and
+                  a soup of divs is not just academic. It directly affects how
+                  well your content performs in search and how accessible it is
+                  to the estimated 1 billion people globally who use assistive
+                  technology.
+                </p>
+              </section>
+
+              <section aria-label="Key semantic elements" class="mt-6">
+                <h2 class="text-xl font-bold mb-4">Key Semantic Elements</h2>
+                <div class="space-y-3">
+                  <details class="bg-slate-100 rounded-xl">
+                    <summary
+                      class="px-5 py-4 cursor-pointer font-semibold text-violet-700 hover:text-violet-800"
+                    >
+                      article — Self-contained composition
+                    </summary>
+                    <p
+                      class="px-5 py-4 text-slate-600 text-sm border-t border-slate-200"
+                    >
+                      An article could be a forum post, a magazine article, a
+                      blog entry, a user comment, or any other independent item
+                      of content. It makes sense on its own, even outside the
+                      page context.
+                    </p>
+                  </details>
+                  <details class="bg-slate-100 rounded-xl">
+                    <summary
+                      class="px-5 py-4 cursor-pointer font-semibold text-violet-700 hover:text-violet-800"
+                    >
+                      section — Thematic grouping
+                    </summary>
+                    <p
+                      class="px-5 py-4 text-slate-600 text-sm border-t border-slate-200"
+                    >
+                      A section is a thematic grouping of content, typically
+                      with a heading. Use it when content belongs together
+                      thematically but doesn't warrant an article of its own.
+                    </p>
+                  </details>
+                  <details class="bg-slate-100 rounded-xl">
+                    <summary
+                      class="px-5 py-4 cursor-pointer font-semibold text-violet-700 hover:text-violet-800"
+                    >
+                      aside — Tangentially related content
+                    </summary>
+                    <p
+                      class="px-5 py-4 text-slate-600 text-sm border-t border-slate-200"
+                    >
+                      An aside represents content only indirectly related to the
+                      main document content — like a sidebar, pull quote, or
+                      advertising that can be ignored without affecting the flow
+                      of the main content.
+                    </p>
+                  </details>
+                </div>
+              </section>
+
+              <footer
+                class="mt-8 pt-6 border-t border-slate-200 flex items-center justify-between"
+              >
+                <div class="flex gap-2">
+                  <span
+                    class="bg-slate-100 text-slate-600 text-xs px-3 py-1 rounded-full"
+                    >#html</span
+                  >
+                  <span
+                    class="bg-slate-100 text-slate-600 text-xs px-3 py-1 rounded-full"
+                    >#semantics</span
+                  >
+                  <span
+                    class="bg-slate-100 text-slate-600 text-xs px-3 py-1 rounded-full"
+                    >#a11y</span
+                  >
+                </div>
+                <button
+                  class="text-violet-600 text-sm font-bold hover:underline"
+                >
+                  Share →
+                </button>
+              </footer>
+            </div>
+          </article>
+
+          <section aria-label="More articles">
+            <h2 class="text-xl font-bold mb-4">More Articles</h2>
+            <div class="space-y-4">
+              <article
+                class="bg-white border border-slate-200 rounded-xl p-6 flex gap-4"
+              >
+                <img
+                  src="https://picsum.photos/seed/sem2/100/100"
+                  alt=""
+                  class="w-20 h-20 rounded-lg object-cover flex-shrink-0"
+                />
+                <div>
+                  <h3 class="font-bold mb-1">
+                    ARIA Roles and When to Use Them
+                  </h3>
+                  <p class="text-slate-600 text-sm mb-2">
+                    Accessible Rich Internet Applications (ARIA) roles
+                    supplement semantic HTML when native semantics fall short...
+                  </p>
+                  <time datetime="2025-02-20" class="text-slate-500 text-xs"
+                    >February 20, 2025</time
+                  >
+                </div>
+              </article>
+              <article
+                class="bg-white border border-slate-200 rounded-xl p-6 flex gap-4"
+              >
+                <img
+                  src="https://picsum.photos/seed/sem3/100/100"
+                  alt=""
+                  class="w-20 h-20 rounded-lg object-cover flex-shrink-0"
+                />
+                <div>
+                  <h3 class="font-bold mb-1">
+                    The Heading Hierarchy Mistake 90% of Sites Make
+                  </h3>
+                  <p class="text-slate-600 text-sm mb-2">
+                    Skipping heading levels or using headings for styling rather
+                    than structure is a critical accessibility failure...
+                  </p>
+                  <time datetime="2025-01-10" class="text-slate-500 text-xs"
+                    >January 10, 2025</time
+                  >
+                </div>
+              </article>
+            </div>
+          </section>
+        </main>
+
+        <aside class="w-72 flex-shrink-0 space-y-6" aria-label="Sidebar">
+          <div class="bg-white border border-slate-200 rounded-xl p-6">
+            <h3 class="font-bold text-violet-600 mb-4">About the Author</h3>
+            <img
+              src="https://picsum.photos/seed/author/60/60"
+              alt="Priya Sharma"
+              class="w-16 h-16 rounded-full mb-3"
+            />
+            <p class="text-slate-600 text-sm">
+              Priya Sharma is a senior frontend engineer with 8 years of
+              experience building accessible, standards-compliant web
+              applications.
+            </p>
+            <address class="not-italic mt-3 text-sm">
+              <a
+                href="mailto:priya@example.com"
+                class="text-violet-600 hover:underline block"
+                >priya@example.com</a
+              >
+              <a href="#" class="text-violet-600 hover:underline block mt-1"
+                >@priya_codes</a
+              >
+            </address>
+          </div>
+
+          <div class="bg-white border border-slate-200 rounded-xl p-6">
+            <h3 class="font-bold text-violet-600 mb-4">
+              Semantic Elements Reference
+            </h3>
+            <dl class="space-y-3 text-sm">
+              <div>
+                <dt class="font-bold text-slate-900">&lt;main&gt;</dt>
+                <dd class="text-slate-600">Primary content — one per page</dd>
+              </div>
+              <div>
+                <dt class="font-bold text-slate-900">&lt;nav&gt;</dt>
+                <dd class="text-slate-600">Navigation links</dd>
+              </div>
+              <div>
+                <dt class="font-bold text-slate-900">&lt;article&gt;</dt>
+                <dd class="text-slate-600">Standalone content</dd>
+              </div>
+              <div>
+                <dt class="font-bold text-slate-900">&lt;section&gt;</dt>
+                <dd class="text-slate-600">Thematic group</dd>
+              </div>
+              <div>
+                <dt class="font-bold text-slate-900">&lt;aside&gt;</dt>
+                <dd class="text-slate-600">Tangential content</dd>
+              </div>
+              <div>
+                <dt class="font-bold text-slate-900">&lt;time&gt;</dt>
+                <dd class="text-slate-600">Date/time with datetime attr</dd>
+              </div>
+              <div>
+                <dt class="font-bold text-slate-900">&lt;address&gt;</dt>
+                <dd class="text-slate-600">Contact information</dd>
+              </div>
+              <div>
+                <dt class="font-bold text-slate-900">&lt;figure&gt;</dt>
+                <dd class="text-slate-600">Self-contained media</dd>
+              </div>
+              <div>
+                <dt class="font-bold text-slate-900">&lt;mark&gt;</dt>
+                <dd class="text-slate-600">Highlighted for relevance</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="bg-violet-100 border border-violet-200 rounded-xl p-6">
+            <h3 class="font-bold text-violet-700 mb-2">Newsletter</h3>
+            <p class="text-slate-600 text-sm mb-4">
+              Weekly HTML & CSS deep-dives.
+            </p>
+            <input
+              type="email"
+              placeholder="you@example.com"
+              class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-violet-500 mb-3"
+            />
+            <button
+              class="w-full bg-violet-500 text-white font-bold py-2 rounded-lg hover:bg-violet-600 transition-colors text-sm"
+            >
+              Subscribe
+            </button>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <footer class="border-t border-slate-200 mt-12 px-8 py-8">
+      <div
+        class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-4"
+      >
+        <div>
+          <p class="font-bold text-lg mb-1">SemanticNews</p>
+          <p class="text-slate-600 text-sm">
+            Demonstrating every semantic HTML element in a real-world layout.
+          </p>
+        </div>
+        <nav aria-label="Footer navigation">
+          <ul class="flex gap-4 text-sm text-slate-600">
+            <li><a href="#" class="hover:text-violet-600">Privacy</a></li>
+            <li><a href="#" class="hover:text-violet-600">Terms</a></li>
+            <li><a href="#" class="hover:text-violet-600">Sitemap</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="max-w-6xl mx-auto mt-6 pt-6 border-t border-slate-200">
+        <small class="text-slate-500"
+          >© <time datetime="2025">2025</time> SemanticNews. Built with semantic
+          HTML5.</small
+        >
+      </div>
+    </footer>
+  </body>
+</html>

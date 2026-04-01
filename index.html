@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Mastery — Complete Reference Library</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Outfit", sans-serif;
+        background: #ffffff;
+        color: #0a0a0a;
+      }
+      code {
+        font-family: "JetBrains Mono", monospace;
+      }
+      .card {
+        transition:
+          transform 0.18s,
+          box-shadow 0.18s;
+      }
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+      }
+      .glow-amber {
+        box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.4);
+      }
+      .glow-amber:hover {
+        box-shadow:
+          0 0 0 1px #fbbf24,
+          0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+      .glow-violet {
+        box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.4);
+      }
+      .glow-violet:hover {
+        box-shadow:
+          0 0 0 1px #8b5cf6,
+          0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+      .glow-emerald {
+        box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.4);
+      }
+      .glow-emerald:hover {
+        box-shadow:
+          0 0 0 1px #34d399,
+          0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+      .glow-rose {
+        box-shadow: 0 0 0 1px rgba(244, 63, 94, 0.4);
+      }
+      .glow-rose:hover {
+        box-shadow:
+          0 0 0 1px #f43f5e,
+          0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen">
+    <div style="background: linear-gradient(135deg, #f8fafc 0%, #ffffff 60%)">
+      <div class="max-w-6xl mx-auto px-8 py-20 text-center">
+        <div
+          class="inline-flex items-center gap-2 bg-zinc-100 border border-zinc-200 rounded-full px-4 py-2 text-sm text-zinc-600 mb-8"
+        >
+          <span
+            class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
+          ></span>
+          20 Years of HTML Knowledge
+        </div>
+        <h1 class="text-6xl font-black tracking-tight mb-4 leading-none">
+          HTML
+          <span
+            style="
+              background: linear-gradient(90deg, #fbbf24, #f43f5e, #818cf8);
+              -webkit-text-fill-color: transparent;
+            "
+            >Mastery</span
+          >
+        </h1>
+        <p class="text-zinc-600 text-xl max-w-2xl mx-auto mb-12">
+          Complete reference library — from basic tags to advanced Web
+          Components. Every file is a living, interactive demo.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-amber-400"></span
+            ><span class="text-sm text-zinc-600">Basic</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-violet-500"></span
+            ><span class="text-sm text-zinc-600">Intermediate</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-emerald-500"></span
+            ><span class="text-sm text-zinc-600">Advanced</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-rose-500"></span
+            ><span class="text-sm text-zinc-600">Super Advanced</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <main class="max-w-6xl mx-auto px-8 pb-20 space-y-16">
+      <section>
+        <div class="flex items-center gap-4 mb-8">
+          <span
+            class="bg-amber-400 text-zinc-950 text-xs font-black px-3 py-1.5 rounded-full"
+            >BASIC</span
+          >
+          <h2 class="text-2xl font-black">Foundation</h2>
+          <div class="flex-1 h-px bg-zinc-200"></div>
+          <span class="text-zinc-500 text-sm">4 files</span>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <a
+            href="basic/tags.html"
+            class="card glow-amber bg-white border border-zinc-200 rounded-2xl p-6 block"
+          >
+            <div class="text-3xl mb-4">🏷️</div>
+            <div class="font-black text-lg mb-1">Tags</div>
+            <div class="text-zinc-600 text-sm">
+              All HTML tags — structural, text, semantic, lists, links. With
+              live rendered examples.
+            </div>
+            <div class="mt-4 text-amber-500 text-xs font-bold">tags.html →</div>
+          </a>
+          <a
+            href="basic/input.html"
+            class="card glow-amber bg-white border border-zinc-200 rounded-2xl p-6 block"
+          >
+            <div class="text-3xl mb-4">⌨️</div>
+            <div class="font-black text-lg mb-1">Inputs</div>
+            <div class="text-zinc-600 text-sm">
+              All input types — text, date, color, file, checkbox, radio. All
+              attributes demoed.
+            </div>
+            <div class="mt-4 text-amber-500 text-xs font-bold">
+              input.html →
+            </div>
+          </a>
+          <a
+            href="basic/table.html"
+            class="card glow-amber bg-white border border-zinc-200 rounded-2xl p-6 block"
+          >
+            <div class="text-3xl mb-4">📊</div>
+            <div class="font-black text-lg mb-1">Tables</div>
+            <div class="text-zinc-600 text-sm">
+              thead/tbody/tfoot, colspan, rowspan, colgroup, caption — all table
+              features.
+            </div>
+            <div class="mt-4 text-amber-500 text-xs font-bold">
+              table.html →
+            </div>
+          </a>
+          <a
+            href="basic/media.html"
+            class="card glow-amber bg-white border border-zinc-200 rounded-2xl p-6 block"
+          >
+            <div class="text-3xl mb-4">🎬</div>
+            <div class="font-black text-lg mb-1">Media</div>
+            <div class="text-zinc-600 text-sm">
+              img, picture, audio, video, iframe, SVG, canvas with all
+              attributes.
+            </div>
+            <div class="mt-4 text-amber-500 text-xs font-bold">
+              media.html →
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <div class="flex items-center gap-4 mb-8">
+          <span
+            class="bg-violet-500 text-white text-xs font-black px-3 py-1.5 rounded-full"
+            >INTERMEDIATE</span
+          >
+          <h2 class="text-2xl font-black">Core Skills</h2>
+          <div class="flex-1 h-px bg-zinc-200"></div>
+          <span class="text-zinc-500 text-sm">3 files</span>
+        </div>
+        <div class="grid md:grid-cols-3 gap-4">
+          <a
+            href="intermediate/forms.html"
+            class="card glow-violet bg-white border border-zinc-200 rounded-2xl p-6 block"
+          >
+            <div class="text-3xl mb-4">📋</div>
+            <div class="font-black text-lg mb-1">Forms</div>
+            <div class="text-zinc-600 text-sm">
+              fieldset/legend, HTML5 validation, output, meter, progress,
+              multi-step form pattern.
+            </div>
+            <div class="mt-4 text-violet-500 text-xs font-bold">
+              forms.html →
+            </div>
+          </a>
+          <a
+            href="intermediate/semantic.html"
+            class="card glow-violet bg-white border border-zinc-200 rounded-2xl p-6 block"
+          >
+            <div class="text-3xl mb-4">📰</div>
+            <div class="font-black text-lg mb-1">Semantics</div>
+            <div class="text-zinc-600 text-sm">
+              A real news page layout using header, main, article, aside,
+              section, time, address, footer.
+            </div>
+            <div class="mt-4 text-violet-500 text-xs font-bold">
+              semantic.html →
+            </div>
+          </a>
+          <a
+            href="intermediate/accessibility.html"
+            class="card glow-violet bg-white border border-zinc-200 rounded-2xl p-6 block"
+          >
+            <div class="text-3xl mb-4">♿</div>
+            <div class="font-black text-lg mb-1">Accessibility</div>
+            <div class="text-zinc-600 text-sm">
+              ARIA roles, aria-live, tabindex, focus trap, accessible tabs,
+              modal, skip links.
+            </div>
+            <div class="mt-4 text-violet-500 text-xs font-bold">
+              accessibility.html →
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <div class="flex items-center gap-4 mb-8">
+          <span
+            class="bg-emerald-400 text-zinc-950 text-xs font-black px-3 py-1.5 rounded-full"
+            >ADVANCED</span
+          >
+          <h2 class="text-2xl font-black">Power Features</h2>
+          <div class="flex-1 h-px bg-zinc-200"></div>
+          <span class="text-zinc-500 text-sm">3 files</span>
+        </div>
+        <div class="grid md:grid-cols-3 gap-4">
+          <a
+            href="advanced/canvas.html"
+            class="card glow-emerald bg-white border border-zinc-200 rounded-2xl p-6 block"
+          >
+            <div class="text-3xl mb-4">🖌️</div>
+            <div class="font-black text-lg mb-1">Canvas API</div>
+            <div class="text-zinc-600 text-sm">
+              Shapes, paths, gradients, text, transforms, animation loop, and
+              interactive drawing board.
+            </div>
+            <div class="mt-4 text-emerald-500 text-xs font-bold">
+              canvas.html →
+            </div>
+          </a>
+          <a
+            href="advanced/svg.html"
+            class="card glow-emerald bg-white border border-zinc-200 rounded-2xl p-6 block"
+          >
+            <div class="text-3xl mb-4">✏️</div>
+            <div class="font-black text-lg mb-1">SVG</div>
+            <div class="text-zinc-600 text-sm">
+              Shapes, paths, filters, SMIL animations, patterns, masks, and an
+              interactive bar chart.
+            </div>
+            <div class="mt-4 text-emerald-500 text-xs font-bold">
+              svg.html →
+            </div>
+          </a>
+          <a
+            href="advanced/apis.html"
+            class="card glow-emerald bg-white border border-zinc-200 rounded-2xl p-6 block"
+          >
+            <div class="text-3xl mb-4">🔌</div>
+            <div class="font-black text-lg mb-1">Web APIs</div>
+            <div class="text-zinc-600 text-sm">
+              Geolocation, Clipboard, Drag & Drop, Web Storage,
+              IntersectionObserver, Speech API.
+            </div>
+            <div class="mt-4 text-emerald-500 text-xs font-bold">
+              apis.html →
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <div class="flex items-center gap-4 mb-8">
+          <span
+            class="bg-rose-500 text-white text-xs font-black px-3 py-1.5 rounded-full"
+            >SUPER ADVANCED</span
+          >
+          <h2 class="text-2xl font-black">Expert Level</h2>
+          <div class="flex-1 h-px bg-zinc-200"></div>
+          <span class="text-zinc-500 text-sm">3 files</span>
+        </div>
+        <div class="grid md:grid-cols-3 gap-4">
+          <a
+            href="super-advanced/webcomponents.html"
+            class="card glow-rose bg-white border border-zinc-200 rounded-2xl p-6 block"
+          >
+            <div class="text-3xl mb-4">🧩</div>
+            <div class="font-black text-lg mb-1">Web Components</div>
+            <div class="text-zinc-600 text-sm">
+              Custom Elements, Shadow DOM, HTML Templates, slots, lifecycle
+              callbacks — all live.
+            </div>
+            <div class="mt-4 text-rose-500 text-xs font-bold">
+              webcomponents.html →
+            </div>
+          </a>
+          <a
+            href="super-advanced/performance.html"
+            class="card glow-rose bg-white border border-zinc-200 rounded-2xl p-6 block"
+          >
+            <div class="text-3xl mb-4">⚡</div>
+            <div class="font-black text-lg mb-1">Performance</div>
+            <div class="text-zinc-600 text-sm">
+              Resource hints, script loading, image optimization, Navigation
+              Timing API, CSP.
+            </div>
+            <div class="mt-4 text-rose-500 text-xs font-bold">
+              performance.html →
+            </div>
+          </a>
+          <a
+            href="super-advanced/meta-seo.html"
+            class="card glow-rose bg-white border border-zinc-200 rounded-2xl p-6 block"
+          >
+            <div class="text-3xl mb-4">🔍</div>
+            <div class="font-black text-lg mb-1">Meta & SEO</div>
+            <div class="text-zinc-600 text-sm">
+              Open Graph, Twitter Cards, JSON-LD structured data, canonical
+              tags, hreflang, PWA.
+            </div>
+            <div class="mt-4 text-rose-500 text-xs font-bold">
+              meta-seo.html →
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section
+        class="bg-white border border-zinc-200 rounded-2xl p-10 text-center"
+      >
+        <h2 class="text-2xl font-black mb-3">File Structure</h2>
+        <pre
+          class="text-left inline-block bg-zinc-50 border border-zinc-200 rounded-xl p-6 text-sm text-zinc-700 font-mono"
+        >html-mastery/
+├── index.html             <span class="text-zinc-500">← You are here</span>
+├── basic/
+│   ├── tags.html          <span class="text-amber-500">All HTML tags</span>
+│   ├── input.html         <span class="text-amber-500">All input types</span>
+│   ├── table.html         <span class="text-amber-500">Tables & layout</span>
+│   └── media.html         <span class="text-amber-500">Audio, video, img</span>
+├── intermediate/
+│   ├── forms.html         <span class="text-violet-500">Advanced forms</span>
+│   ├── semantic.html      <span class="text-violet-500">Semantic HTML</span>
+│   └── accessibility.html <span class="text-violet-500">ARIA & a11y</span>
+├── advanced/
+│   ├── canvas.html        <span class="text-emerald-500">Canvas API</span>
+│   ├── svg.html           <span class="text-emerald-500">SVG mastery</span>
+│   └── apis.html          <span class="text-emerald-500">Web APIs</span>
+└── super-advanced/
+    ├── webcomponents.html  <span class="text-rose-500">Web Components</span>
+    ├── performance.html    <span class="text-rose-500">Performance</span>
+    └── meta-seo.html       <span class="text-rose-500">Meta & SEO</span></pre>
+      </section>
+    </main>
+  </body>
+</html>

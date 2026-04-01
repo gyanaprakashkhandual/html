@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Web APIs</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Space Grotesk", sans-serif;
+      }
+      code {
+        font-family: "JetBrains Mono", monospace;
+      }
+    </style>
+  </head>
+  <body class="bg-white text-gray-900 min-h-screen">
+    <header class="border-b border-gray-200 px-8 py-6">
+      <div class="max-w-5xl mx-auto flex items-center gap-4">
+        <span
+          class="bg-emerald-400 text-gray-950 text-xs font-bold px-2 py-1 rounded"
+          >ADVANCED</span
+        >
+        <h1 class="text-3xl font-bold">HTML5 Web APIs</h1>
+      </div>
+    </header>
+    <main class="max-w-5xl mx-auto px-8 py-12 space-y-12">
+      <section class="bg-white border border-gray-200 rounded-xl p-8">
+        <h2 class="text-emerald-500 font-bold mb-4">Geolocation API</h2>
+        <button
+          onclick="getLocation()"
+          class="bg-emerald-400 text-gray-950 font-bold px-5 py-2 rounded-lg hover:bg-emerald-300 transition-colors text-sm"
+        >
+          Get My Location
+        </button>
+        <div id="geoResult" class="mt-4 text-sm text-gray-700"></div>
+        <script>
+          function getLocation() {
+            const out = document.getElementById("geoResult");
+            if (!navigator.geolocation) {
+              out.textContent = "Geolocation not supported";
+              return;
+            }
+            out.textContent = "Requesting location...";
+            navigator.geolocation.getCurrentPosition(
+              (pos) => {
+                out.innerHTML = `<span class="text-emerald-500">✓ Location found</span><br>Latitude: <code class="text-emerald-500">${pos.coords.latitude.toFixed(6)}</code><br>Longitude: <code class="text-emerald-500">${pos.coords.longitude.toFixed(6)}</code><br>Accuracy: <code class="text-emerald-500">±${pos.coords.accuracy.toFixed(0)}m</code>`;
+              },
+              (err) => {
+                out.innerHTML = `<span class="text-red-500">Error: ${err.message}</span>`;
+              },
+            );
+          }
+        </script>
+      </section>
+
+      <section class="bg-white border border-gray-200 rounded-xl p-8">
+        <h2 class="text-emerald-500 font-bold mb-4">Clipboard API</h2>
+        <div class="flex gap-3 flex-wrap">
+          <input
+            id="clipInput"
+            type="text"
+            value="Hello from HTML5 Clipboard API!"
+            class="flex-1 bg-white border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-emerald-400"
+          />
+          <button
+            onclick="copyText()"
+            class="bg-emerald-400 text-gray-950 font-bold px-5 py-2 rounded-lg hover:bg-emerald-300 transition-colors text-sm"
+          >
+            Copy
+          </button>
+          <button
+            onclick="pasteText()"
+            class="border border-gray-300 text-gray-700 font-bold px-5 py-2 rounded-lg hover:border-emerald-400 hover:text-emerald-400 transition-colors text-sm"
+          >
+            Paste
+          </button>
+        </div>
+        <div id="clipMsg" class="mt-3 text-sm"></div>
+        <script>
+          async function copyText() {
+            try {
+              await navigator.clipboard.writeText(
+                document.getElementById("clipInput").value,
+              );
+              document.getElementById("clipMsg").innerHTML =
+                '<span class="text-emerald-500">✓ Copied to clipboard!</span>';
+            } catch (e) {
+              document.getElementById("clipMsg").innerHTML =
+                `<span class="text-red-500">Failed: ${e.message}</span>`;
+            }
+          }
+          async function pasteText() {
+            try {
+              const t = await navigator.clipboard.readText();
+              document.getElementById("clipInput").value = t;
+              document.getElementById("clipMsg").innerHTML =
+                '<span class="text-emerald-500">✓ Pasted from clipboard!</span>';
+            } catch (e) {
+              document.getElementById("clipMsg").innerHTML =
+                `<span class="text-red-500">Failed: ${e.message}</span>`;
+            }
+          }
+        </script>
+      </section>
+
+      <section class="bg-white border border-gray-200 rounded-xl p-8">
+        <h2 class="text-emerald-500 font-bold mb-4">Drag & Drop API</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <p class="text-gray-600 text-sm mb-3">Draggable items:</p>
+            <div class="space-y-2" id="dragSource">
+              <div
+                draggable="true"
+                ondragstart="dragStart(event)"
+                data-id="item1"
+                class="drag-item bg-white border border-gray-300 rounded-lg px-4 py-3 cursor-grab active:cursor-grabbing text-sm flex items-center gap-2 hover:border-emerald-400 transition-colors"
+              >
+                <span>⠿</span> Item One
+              </div>
+              <div
+                draggable="true"
+                ondragstart="dragStart(event)"
+                data-id="item2"
+                class="drag-item bg-white border border-gray-300 rounded-lg px-4 py-3 cursor-grab active:cursor-grabbing text-sm flex items-center gap-2 hover:border-emerald-400 transition-colors"
+              >
+                <span>⠿</span> Item Two
+              </div>
+              <div
+                draggable="true"
+                ondragstart="dragStart(event)"
+                data-id="item3"
+                class="drag-item bg-white border border-gray-300 rounded-lg px-4 py-3 cursor-grab active:cursor-grabbing text-sm flex items-center gap-2 hover:border-emerald-400 transition-colors"
+              >
+                <span>⠿</span> Item Three
+              </div>
+            </div>
+          </div>
+          <div
+            id="dropZone"
+            ondragover="dragOver(event)"
+            ondrop="drop(event)"
+            ondragleave="dragLeave(event)"
+            class="border-2 border-dashed border-gray-300 rounded-xl p-6 flex items-center justify-center text-gray-500 text-sm transition-colors min-h-36"
+          >
+            Drop items here
+          </div>
+        </div>
+        <script>
+          let draggedId;
+          function dragStart(e) {
+            draggedId = e.currentTarget.dataset.id;
+            e.dataTransfer.effectAllowed = "move";
+          }
+          function dragOver(e) {
+            e.preventDefault();
+            document
+              .getElementById("dropZone")
+              .classList.add("border-emerald-400", "bg-emerald-50");
+          }
+          function dragLeave() {
+            document
+              .getElementById("dropZone")
+              .classList.remove("border-emerald-400", "bg-emerald-50");
+          }
+          function drop(e) {
+            e.preventDefault();
+            const zone = document.getElementById("dropZone");
+            zone.classList.remove("border-emerald-400", "bg-emerald-50");
+            const el = document.querySelector(`[data-id="${draggedId}"]`);
+            if (el) {
+              const clone = el.cloneNode(true);
+              clone.removeAttribute("draggable");
+              clone.className =
+                "bg-emerald-100 border border-emerald-300 rounded-lg px-4 py-3 text-sm text-emerald-600 mb-2";
+              zone.append(clone);
+              zone.style.alignItems = "flex-start";
+              zone.style.justifyContent = "flex-start";
+              zone.style.flexDirection = "column";
+              zone.style.display = "flex";
+            }
+          }
+        </script>
+      </section>
+
+      <section class="bg-white border border-gray-200 rounded-xl p-8">
+        <h2 class="text-emerald-500 font-bold mb-4">Web Storage API</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <h3 class="font-semibold mb-3 text-sm">localStorage (persists)</h3>
+            <div class="flex gap-2 mb-2">
+              <input
+                id="lsKey"
+                placeholder="key"
+                class="w-24 bg-white border border-gray-300 rounded px-3 py-1 text-sm focus:outline-none focus:border-emerald-400"
+              />
+              <input
+                id="lsVal"
+                placeholder="value"
+                class="flex-1 bg-white border border-gray-300 rounded px-3 py-1 text-sm focus:outline-none focus:border-emerald-400"
+              />
+              <button
+                onclick="setLS()"
+                class="bg-emerald-400 text-gray-950 font-bold px-3 py-1 rounded text-sm hover:bg-emerald-300"
+              >
+                Set
+              </button>
+            </div>
+            <button
+              onclick="getLS()"
+              class="bg-gray-200 text-gray-900 font-bold px-3 py-1 rounded text-sm hover:bg-gray-300 mr-2"
+            >
+              Get
+            </button>
+            <button
+              onclick="clearLS()"
+              class="border border-gray-300 text-gray-700 font-bold px-3 py-1 rounded text-sm hover:border-red-400 hover:text-red-500"
+            >
+              Clear
+            </button>
+            <div id="lsOut" class="mt-3 text-sm text-gray-600 font-mono"></div>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-3 text-sm">
+              sessionStorage (tab only)
+            </h3>
+            <div class="flex gap-2 mb-2">
+              <input
+                id="ssKey"
+                placeholder="key"
+                class="w-24 bg-white border border-gray-300 rounded px-3 py-1 text-sm focus:outline-none focus:border-emerald-400"
+              />
+              <input
+                id="ssVal"
+                placeholder="value"
+                class="flex-1 bg-white border border-gray-300 rounded px-3 py-1 text-sm focus:outline-none focus:border-emerald-400"
+              />
+              <button
+                onclick="setSS()"
+                class="bg-emerald-400 text-gray-950 font-bold px-3 py-1 rounded text-sm hover:bg-emerald-300"
+              >
+                Set
+              </button>
+            </div>
+            <button
+              onclick="getSS()"
+              class="bg-gray-200 text-gray-900 font-bold px-3 py-1 rounded text-sm hover:bg-gray-300 mr-2"
+            >
+              Get
+            </button>
+            <button
+              onclick="clearSS()"
+              class="border border-gray-300 text-gray-700 font-bold px-3 py-1 rounded text-sm hover:border-red-400 hover:text-red-500"
+            >
+              Clear
+            </button>
+            <div id="ssOut" class="mt-3 text-sm text-gray-600 font-mono"></div>
+          </div>
+        </div>
+        <script>
+          function setLS() {
+            localStorage.setItem(
+              document.getElementById("lsKey").value,
+              document.getElementById("lsVal").value,
+            );
+            document.getElementById("lsOut").textContent = "✓ Saved";
+          }
+          function getLS() {
+            const v = localStorage.getItem(
+              document.getElementById("lsKey").value,
+            );
+            document.getElementById("lsOut").textContent =
+              v !== null ? `Value: "${v}"` : "Key not found";
+          }
+          function clearLS() {
+            localStorage.clear();
+            document.getElementById("lsOut").textContent = "Cleared all";
+          }
+          function setSS() {
+            sessionStorage.setItem(
+              document.getElementById("ssKey").value,
+              document.getElementById("ssVal").value,
+            );
+            document.getElementById("ssOut").textContent = "✓ Saved";
+          }
+          function getSS() {
+            const v = sessionStorage.getItem(
+              document.getElementById("ssKey").value,
+            );
+            document.getElementById("ssOut").textContent =
+              v !== null ? `Value: "${v}"` : "Key not found";
+          }
+          function clearSS() {
+            sessionStorage.clear();
+            document.getElementById("ssOut").textContent = "Cleared all";
+          }
+        </script>
+      </section>
+
+      <section class="bg-white border border-gray-200 rounded-xl p-8">
+        <h2 class="text-emerald-500 font-bold mb-4">
+          Intersection Observer API
+        </h2>
+        <p class="text-gray-600 text-sm mb-4">
+          Scroll down — boxes animate when they enter the viewport:
+        </p>
+        <div class="space-y-4">
+          <div
+            class="observe-me opacity-0 translate-y-8 transition-all duration-700 bg-white border border-gray-200 rounded-xl p-6"
+          >
+            <p class="font-bold">📦 Box 1 — Fade in on scroll</p>
+            <p class="text-gray-600 text-sm">
+              IntersectionObserver triggers when this enters the viewport
+            </p>
+          </div>
+          <div
+            class="observe-me opacity-0 translate-y-8 transition-all duration-700 delay-100 bg-white border border-gray-200 rounded-xl p-6"
+          >
+            <p class="font-bold">📦 Box 2 — Staggered animation</p>
+            <p class="text-gray-600 text-sm">
+              threshold: 0.2 means 20% visible before triggering
+            </p>
+          </div>
+          <div
+            class="observe-me opacity-0 translate-y-8 transition-all duration-700 delay-200 bg-white border border-gray-200 rounded-xl p-6"
+          >
+            <p class="font-bold">📦 Box 3 — No JS polling needed</p>
+            <p class="text-gray-600 text-sm">
+              IntersectionObserver is performant — no scroll event listeners
+            </p>
+          </div>
+        </div>
+        <script>
+          const obs = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((e) => {
+                if (e.isIntersecting) {
+                  e.target.classList.remove("opacity-0", "translate-y-8");
+                  obs.unobserve(e.target);
+                }
+              });
+            },
+            { threshold: 0.2 },
+          );
+          document
+            .querySelectorAll(".observe-me")
+            .forEach((el) => obs.observe(el));
+        </script>
+      </section>
+
+      <section class="bg-white border border-gray-200 rounded-xl p-8">
+        <h2 class="text-emerald-500 font-bold mb-4">Web Speech API</h2>
+        <div class="flex gap-3 flex-wrap mb-4">
+          <button
+            onclick="startSpeech()"
+            class="bg-emerald-400 text-gray-950 font-bold px-5 py-2 rounded-lg hover:bg-emerald-300 transition-colors text-sm"
+          >
+            🎤 Start Speech Recognition
+          </button>
+          <button
+            onclick="speakText()"
+            class="border border-gray-300 text-gray-700 font-bold px-5 py-2 rounded-lg hover:border-emerald-400 hover:text-emerald-400 transition-colors text-sm"
+          >
+            🔊 Speak Text
+          </button>
+        </div>
+        <div
+          id="speechResult"
+          class="bg-gray-100 rounded-lg p-4 text-sm text-gray-700 min-h-16"
+        >
+          Results will appear here...
+        </div>
+        <script>
+          function startSpeech() {
+            if (
+              !(
+                "SpeechRecognition" in window ||
+                "webkitSpeechRecognition" in window
+              )
+            ) {
+              document.getElementById("speechResult").textContent =
+                "Speech Recognition not supported in this browser";
+              return;
+            }
+            const SR =
+              window.SpeechRecognition || window.webkitSpeechRecognition;
+            const rec = new SR();
+            rec.lang = "en-IN";
+            rec.interimResults = true;
+            rec.onresult = (e) => {
+              document.getElementById("speechResult").textContent = Array.from(
+                e.results,
+              )
+                .map((r) => r[0].transcript)
+                .join("");
+            };
+            rec.onerror = (e) => {
+              document.getElementById("speechResult").textContent =
+                "Error: " + e.error;
+            };
+            rec.start();
+            document.getElementById("speechResult").textContent =
+              "🎙 Listening...";
+          }
+          function speakText() {
+            if (!window.speechSynthesis) {
+              alert("Speech Synthesis not supported");
+              return;
+            }
+            const utt = new SpeechSynthesisUtterance(
+              "Hello! This is the Web Speech Synthesis API. HTML5 is incredibly powerful!",
+            );
+            utt.lang = "en-IN";
+            utt.rate = 0.9;
+            window.speechSynthesis.speak(utt);
+          }
+        </script>
+      </section>
+    </main>
+  </body>
+</html>

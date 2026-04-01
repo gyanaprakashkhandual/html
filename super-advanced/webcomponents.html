@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Components</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Outfit", sans-serif;
+      }
+      code {
+        font-family: "JetBrains Mono", monospace;
+      }
+    </style>
+  </head>
+  <body class="bg-white text-zinc-900 min-h-screen">
+    <header class="border-b border-zinc-200 px-8 py-6">
+      <div class="max-w-5xl mx-auto flex items-center gap-4">
+        <span class="bg-rose-500 text-white text-xs font-bold px-2 py-1 rounded"
+          >SUPER ADVANCED</span
+        >
+        <h1 class="text-3xl font-black">Web Components</h1>
+      </div>
+    </header>
+    <main class="max-w-5xl mx-auto px-8 py-12 space-y-16">
+      <section>
+        <h2
+          class="text-rose-500 text-xs font-bold tracking-widest uppercase mb-6"
+        >
+          Custom Elements — &lt;x-card&gt;
+        </h2>
+        <div class="flex gap-4 flex-wrap">
+          <x-card title="HTML5" icon="🧱" color="#f43f5e"
+            >Structure layer of the web. Semantic elements communicate meaning
+            to browsers, crawlers, and assistive technologies.</x-card
+          >
+          <x-card title="CSS3" icon="🎨" color="#818cf8"
+            >Presentation layer. Controls layout, color, typography, and
+            animations. Grid and Flexbox changed frontend forever.</x-card
+          >
+          <x-card title="JavaScript" icon="⚡" color="#fbbf24"
+            >Behavior layer. Adds interactivity, async operations, DOM
+            manipulation, and complex application logic.</x-card
+          >
+        </div>
+      </section>
+
+      <section>
+        <h2
+          class="text-rose-500 text-xs font-bold tracking-widest uppercase mb-6"
+        >
+          Custom Element with Observed Attributes — &lt;x-badge&gt;
+        </h2>
+        <div class="bg-white border border-zinc-200 rounded-xl p-8 space-y-6">
+          <div class="flex flex-wrap gap-3">
+            <x-badge type="success" label="Published"></x-badge>
+            <x-badge type="warning" label="Pending Review"></x-badge>
+            <x-badge type="error" label="Failed"></x-badge>
+            <x-badge type="info" label="In Progress"></x-badge>
+          </div>
+          <div class="flex gap-3 flex-wrap">
+            <button
+              onclick="
+                document
+                  .querySelector('x-badge')
+                  .setAttribute('label', 'Updated!')
+              "
+              class="bg-zinc-800 text-white font-bold px-4 py-2 rounded-lg text-sm hover:bg-zinc-900 transition-colors"
+            >
+              Change Label
+            </button>
+            <button
+              onclick="
+                document
+                  .querySelector('x-badge')
+                  .setAttribute('type', 'warning')
+              "
+              class="bg-zinc-800 text-white font-bold px-4 py-2 rounded-lg text-sm hover:bg-zinc-900 transition-colors"
+            >
+              Change Type
+            </button>
+          </div>
+          <p class="text-zinc-600 text-sm">
+            Attributes are observed — changes re-render automatically via
+            <code>attributeChangedCallback</code>
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2
+          class="text-rose-500 text-xs font-bold tracking-widest uppercase mb-6"
+        >
+          Shadow DOM — &lt;x-toggle&gt;
+        </h2>
+        <div class="bg-white border border-zinc-200 rounded-xl p-8 space-y-4">
+          <p class="text-zinc-600 text-sm">
+            Shadow DOM encapsulates styles and markup. External CSS cannot leak
+            in; internal CSS cannot leak out.
+          </p>
+          <div class="flex gap-6 flex-wrap">
+            <x-toggle label="Dark Mode" checked></x-toggle>
+            <x-toggle label="Notifications"></x-toggle>
+            <x-toggle label="Auto-save" checked></x-toggle>
+            <x-toggle label="Analytics"></x-toggle>
+          </div>
+          <p class="text-zinc-600 text-sm">
+            Try inspecting — you'll see a <code>#shadow-root</code> in DevTools
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2
+          class="text-rose-500 text-xs font-bold tracking-widest uppercase mb-6"
+        >
+          HTML Templates — &lt;template&gt; & &lt;slot&gt;
+        </h2>
+        <template id="alertTemplate">
+          <div class="alert-box">
+            <div class="alert-header">
+              <span class="alert-icon"></span>
+              <slot name="title">Alert</slot>
+            </div>
+            <div class="alert-body"><slot></slot></div>
+          </div>
+        </template>
+
+        <div class="space-y-3">
+          <x-alert type="success">
+            <span slot="title">Build Succeeded</span>
+            All 47 tests passed. Deployment is ready.
+          </x-alert>
+          <x-alert type="warning">
+            <span slot="title">Deprecation Warning</span>
+            The <code>getElementByTag</code> API will be removed in v4.0. Please
+            migrate to querySelector.
+          </x-alert>
+          <x-alert type="error">
+            <span slot="title">Runtime Error</span>
+            Cannot read property 'map' of undefined at line 42.
+          </x-alert>
+        </div>
+      </section>
+
+      <section>
+        <h2
+          class="text-rose-500 text-xs font-bold tracking-widest uppercase mb-6"
+        >
+          Lifecycle Callbacks Demo
+        </h2>
+        <div class="bg-white border border-zinc-200 rounded-xl p-8">
+          <x-lifecycle id="lcDemo"></x-lifecycle>
+          <div class="flex gap-3 mt-4 flex-wrap">
+            <button
+              onclick="
+                document
+                  .getElementById('lcDemo')
+                  .setAttribute(
+                    'count',
+                    +document.getElementById('lcDemo').getAttribute('count') +
+                      1 || 1,
+                  )
+              "
+              class="bg-rose-500 text-white font-bold px-4 py-2 rounded-lg text-sm hover:bg-rose-600 transition-colors"
+            >
+              Trigger attributeChangedCallback
+            </button>
+            <button
+              onclick="document.getElementById('lcDemo').remove()"
+              class="border border-zinc-300 text-zinc-700 font-bold px-4 py-2 rounded-lg text-sm hover:border-rose-500 hover:text-rose-500 transition-colors"
+            >
+              Remove (disconnectedCallback)
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      class XCard extends HTMLElement {
+        connectedCallback() {
+          const title = this.getAttribute("title") || "";
+          const icon = this.getAttribute("icon") || "🔷";
+          const color = this.getAttribute("color") || "#818cf8";
+          const content = this.innerHTML;
+          this.innerHTML = "";
+          this.style.cssText = "display:block; flex:1; min-width:200px;";
+          this.innerHTML = `
+      <div style="background:#f8fafc;border:1px solid #e5e5e5;border-radius:16px;padding:24px;height:100%;border-top:3px solid ${color}">
+        <div style="font-size:2rem;margin-bottom:12px">${icon}</div>
+        <h3 style="font-weight:700;font-size:1.1rem;margin-bottom:8px;color:${color}">${title}</h3>
+        <p style="color:#525252;font-size:0.875rem;line-height:1.6">${content}</p>
+      </div>`;
+        }
+      }
+      customElements.define("x-card", XCard);
+
+      class XBadge extends HTMLElement {
+        static get observedAttributes() {
+          return ["label", "type"];
+        }
+        connectedCallback() {
+          this.render();
+        }
+        attributeChangedCallback() {
+          this.render();
+        }
+        render() {
+          const type = this.getAttribute("type") || "info";
+          const label = this.getAttribute("label") || "Badge";
+          const styles = {
+            success: "background:#f0fdf4;color:#15803d;border-color:#4ade80",
+            warning: "background:#fefce8;color:#854d0e;border-color:#facc15",
+            error: "background:#fef2f2;color:#b91c1c;border-color:#f87171",
+            info: "background:#f0f9ff;color:#0369a1;border-color:#60a5fa",
+          };
+          const icons = { success: "✓", warning: "⚠", error: "✕", info: "ℹ" };
+          this.style.display = "inline-block";
+          this.innerHTML = `<span style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;border:1px solid;font-size:12px;font-weight:700;${styles[type] || styles.info}"><span>${icons[type] || "·"}</span>${label}</span>`;
+        }
+      }
+      customElements.define("x-badge", XBadge);
+
+      class XToggle extends HTMLElement {
+        connectedCallback() {
+          const label = this.getAttribute("label") || "Toggle";
+          const checked = this.hasAttribute("checked");
+          const shadow = this.attachShadow({ mode: "open" });
+          shadow.innerHTML = `
+      <style>
+        :host { display: inline-block; }
+        .wrap { display: flex; align-items: center; gap: 12px; cursor: pointer; font-family: Outfit, sans-serif; }
+        .track { width: 48px; height: 26px; border-radius: 13px; background: #d1d5db; position: relative; transition: background 0.2s; }
+        .track.on { background: #f43f5e; }
+        .thumb { width: 22px; height: 22px; border-radius: 50%; background: white; position: absolute; top: 2px; left: 2px; transition: transform 0.2s; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+        .track.on .thumb { transform: translateX(22px); }
+        .lbl { color: #525252; font-size: 14px; user-select: none; }
+      </style>
+      <label class="wrap">
+        <div class="track ${checked ? "on" : ""}" id="t">
+          <div class="thumb"></div>
+        </div>
+        <span class="lbl">${label}</span>
+      </label>`;
+          shadow.querySelector(".wrap").onclick = () => {
+            shadow.getElementById("t").classList.toggle("on");
+          };
+        }
+      }
+      customElements.define("x-toggle", XToggle);
+
+      class XAlert extends HTMLElement {
+        connectedCallback() {
+          const type = this.getAttribute("type") || "info";
+          const colors = {
+            success: {
+              bg: "#f0fdf4",
+              border: "#4ade80",
+              icon: "✓",
+              ic: "#15803d",
+            },
+            warning: {
+              bg: "#fefce8",
+              border: "#facc15",
+              icon: "⚠",
+              ic: "#854d0e",
+            },
+            error: {
+              bg: "#fef2f2",
+              border: "#f87171",
+              icon: "✕",
+              ic: "#b91c1c",
+            },
+            info: {
+              bg: "#f0f9ff",
+              border: "#60a5fa",
+              icon: "ℹ",
+              ic: "#0369a1",
+            },
+          };
+          const c = colors[type] || colors.info;
+          const titleSlot =
+            this.querySelector("[slot=title]")?.innerHTML || "Alert";
+          const body = [...this.childNodes]
+            .filter((n) => !n.getAttribute?.("slot"))
+            .map((n) => n.outerHTML || n.textContent)
+            .join("");
+          this.innerHTML = `
+      <div style="background:${c.bg};border:1px solid ${c.border};border-left:4px solid ${c.border};border-radius:12px;padding:16px 20px;display:flex;gap:12px;align-items:flex-start">
+        <span style="color:${c.ic};font-weight:900;font-size:1rem;margin-top:1px">${c.icon}</span>
+        <div>
+          <div style="font-weight:700;color:${c.ic};margin-bottom:4px;font-size:0.95rem">${titleSlot}</div>
+          <div style="color:#525252;font-size:0.875rem;line-height:1.5">${body}</div>
+        </div>
+      </div>`;
+        }
+      }
+      customElements.define("x-alert", XAlert);
+
+      class XLifecycle extends HTMLElement {
+        static get observedAttributes() {
+          return ["count"];
+        }
+        constructor() {
+          super();
+          this._log = [];
+        }
+        log(msg) {
+          this._log.push(
+            `<span style="color:#64748b;font-size:11px">[${new Date().toLocaleTimeString()}]</span> ${msg}`,
+          );
+          if (this._log.length > 8) this._log.shift();
+          this.render();
+        }
+        connectedCallback() {
+          this.log(
+            '<span style="color:#4ade80">connectedCallback</span> — element added to DOM',
+          );
+          this.render();
+        }
+        disconnectedCallback() {
+          console.log("disconnectedCallback fired");
+        }
+        attributeChangedCallback(name, old, val) {
+          this.log(
+            `<span style="color:#fb923c">attributeChangedCallback</span> — ${name}: "${old}" → "${val}"`,
+          );
+        }
+        render() {
+          this.innerHTML = `<div style="background:#f8fafc;border:1px solid #e5e5e5;border-radius:12px;padding:16px;font-family:JetBrains Mono,monospace;font-size:13px">
+      <div style="color:#f43f5e;font-weight:700;margin-bottom:8px">Lifecycle Log</div>
+      ${this._log.map((l) => `<div style="margin-bottom:4px">${l}</div>`).join("")}
+    </div>`;
+        }
+      }
+      customElements.define("x-lifecycle", XLifecycle);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Media</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Syne", sans-serif;
+      }
+      code {
+        font-family: "JetBrains Mono", monospace;
+      }
+    </style>
+  </head>
+  <body class="bg-white text-zinc-900 min-h-screen">
+    <header class="border-b border-zinc-200 px-8 py-6">
+      <div class="max-w-5xl mx-auto flex items-center gap-4">
+        <span
+          class="bg-amber-400 text-zinc-950 text-xs font-bold px-2 py-1 rounded"
+          >BASIC</span
+        >
+        <h1 class="text-3xl font-extrabold tracking-tight">
+          HTML Media Elements
+        </h1>
+      </div>
+    </header>
+    <main class="max-w-5xl mx-auto px-8 py-12 space-y-16">
+      <section>
+        <h2
+          class="text-amber-500 text-xs font-bold tracking-widest uppercase mb-6"
+        >
+          Image — &lt;img&gt;
+        </h2>
+        <div class="bg-white border border-zinc-200 rounded-xl p-8 space-y-6">
+          <div class="grid md:grid-cols-3 gap-4">
+            <div>
+              <img
+                src="https://picsum.photos/seed/html1/300/200"
+                alt="Landscape photo"
+                class="rounded-xl w-full"
+              />
+              <p class="text-zinc-600 text-xs mt-2">Basic img with src & alt</p>
+            </div>
+            <div>
+              <img
+                src="https://picsum.photos/seed/html2/300/200"
+                alt="Abstract photo"
+                loading="lazy"
+                class="rounded-xl w-full"
+              />
+              <p class="text-zinc-600 text-xs mt-2">With loading="lazy"</p>
+            </div>
+            <div>
+              <img
+                src="https://picsum.photos/seed/html3/300/200"
+                alt="Nature photo"
+                decoding="async"
+                class="rounded-xl w-full object-cover h-32"
+              />
+              <p class="text-zinc-600 text-xs mt-2">With decoding="async"</p>
+            </div>
+          </div>
+          <figure class="text-center">
+            <img
+              src="https://picsum.photos/seed/html4/600/200"
+              alt="Wide landscape"
+              class="rounded-xl w-full"
+            />
+            <figcaption class="text-zinc-600 text-sm mt-2">
+              Using &lt;figure&gt; and &lt;figcaption&gt; together
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section>
+        <h2
+          class="text-amber-500 text-xs font-bold tracking-widest uppercase mb-6"
+        >
+          Picture — &lt;picture&gt; with srcset
+        </h2>
+        <div class="bg-white border border-zinc-200 rounded-xl p-8 space-y-4">
+          <p class="text-zinc-600 text-sm">
+            The browser picks the best source. Try resizing the window.
+          </p>
+          <picture>
+            <source
+              media="(min-width: 800px)"
+              srcset="https://picsum.photos/seed/wide/800/300"
+            />
+            <source
+              media="(min-width: 400px)"
+              srcset="https://picsum.photos/seed/mid/400/250"
+            />
+            <img
+              src="https://picsum.photos/seed/small/300/200"
+              alt="Responsive image"
+              class="rounded-xl w-full"
+            />
+          </picture>
+          <div class="bg-zinc-100 rounded-lg p-4 text-xs">
+            <code class="text-amber-500">&lt;picture&gt;</code>
+            <code class="text-zinc-600"
+              >allows art direction — different images for different
+              screens</code
+            >
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2
+          class="text-amber-500 text-xs font-bold tracking-widest uppercase mb-6"
+        >
+          Audio — &lt;audio&gt;
+        </h2>
+        <div class="bg-white border border-zinc-200 rounded-xl p-8 space-y-4">
+          <p class="text-zinc-600 text-sm">
+            Native browser audio player with controls attribute:
+          </p>
+          <audio controls class="w-full">
+            <source
+              src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+              type="audio/mpeg"
+            />
+            Your browser does not support the audio element.
+          </audio>
+          <div class="grid md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-zinc-100 p-3 rounded-lg">
+              <code class="text-amber-500">controls</code>
+              <p class="text-zinc-600 mt-1">Show play/pause controls</p>
+            </div>
+            <div class="bg-zinc-100 p-3 rounded-lg">
+              <code class="text-amber-500">autoplay</code>
+              <p class="text-zinc-600 mt-1">Play automatically on load</p>
+            </div>
+            <div class="bg-zinc-100 p-3 rounded-lg">
+              <code class="text-amber-500">loop</code>
+              <p class="text-zinc-600 mt-1">Repeat the audio</p>
+            </div>
+            <div class="bg-zinc-100 p-3 rounded-lg">
+              <code class="text-amber-500">muted</code>
+              <p class="text-zinc-600 mt-1">Start muted</p>
+            </div>
+            <div class="bg-zinc-100 p-3 rounded-lg">
+              <code class="text-amber-500">preload</code>
+              <p class="text-zinc-600 mt-1">auto | metadata | none</p>
+            </div>
+            <div class="bg-zinc-100 p-3 rounded-lg">
+              <code class="text-amber-500">&lt;source&gt;</code>
+              <p class="text-zinc-600 mt-1">Multiple format fallbacks</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2
+          class="text-amber-500 text-xs font-bold tracking-widest uppercase mb-6"
+        >
+          Video — &lt;video&gt;
+        </h2>
+        <div class="bg-white border border-zinc-200 rounded-xl p-8 space-y-4">
+          <video
+            controls
+            width="100%"
+            poster="https://picsum.photos/seed/vidposter/800/400"
+            class="rounded-xl"
+          >
+            <source
+              src="https://www.w3schools.com/html/mov_bbb.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+          <div class="grid md:grid-cols-2 gap-3 text-xs">
+            <div class="bg-zinc-100 p-3 rounded-lg">
+              <code class="text-amber-500">poster="url"</code>
+              <p class="text-zinc-600 mt-1">Thumbnail shown before play</p>
+            </div>
+            <div class="bg-zinc-100 p-3 rounded-lg">
+              <code class="text-amber-500">width / height</code>
+              <p class="text-zinc-600 mt-1">Set video dimensions</p>
+            </div>
+            <div class="bg-zinc-100 p-3 rounded-lg">
+              <code class="text-amber-500">playsinline</code>
+              <p class="text-zinc-600 mt-1">Play inline on iOS</p>
+            </div>
+            <div class="bg-zinc-100 p-3 rounded-lg">
+              <code class="text-amber-500">&lt;track&gt;</code>
+              <p class="text-zinc-600 mt-1">Subtitles / captions (VTT)</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2
+          class="text-amber-500 text-xs font-bold tracking-widest uppercase mb-6"
+        >
+          Iframe — &lt;iframe&gt;
+        </h2>
+        <div class="bg-white border border-zinc-200 rounded-xl p-8 space-y-4">
+          <iframe
+            src="https://www.openstreetmap.org/export/embed.html?bbox=72.8,18.9,72.9,19.1&layer=mapnik"
+            width="100%"
+            height="300"
+            class="rounded-xl border-0"
+            title="Mumbai Map"
+            loading="lazy"
+          ></iframe>
+          <div class="grid md:grid-cols-2 gap-3 text-xs">
+            <div class="bg-zinc-100 p-3 rounded-lg">
+              <code class="text-amber-500">src</code>
+              <p class="text-zinc-600 mt-1">URL of embedded page</p>
+            </div>
+            <div class="bg-zinc-100 p-3 rounded-lg">
+              <code class="text-amber-500">title</code>
+              <p class="text-zinc-600 mt-1">Accessibility label (required)</p>
+            </div>
+            <div class="bg-zinc-100 p-3 rounded-lg">
+              <code class="text-amber-500">loading="lazy"</code>
+              <p class="text-zinc-600 mt-1">Lazy load the iframe</p>
+            </div>
+            <div class="bg-zinc-100 p-3 rounded-lg">
+              <code class="text-amber-500">sandbox</code>
+              <p class="text-zinc-600 mt-1">Security restrictions on iframe</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2
+          class="text-amber-500 text-xs font-bold tracking-widest uppercase mb-6"
+        >
+          SVG & Canvas (Inline)
+        </h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white border border-zinc-200 rounded-xl p-8">
+            <code class="text-amber-500 text-xs"
+              >&lt;svg&gt; — Scalable Vector</code
+            >
+            <svg
+              viewBox="0 0 200 100"
+              class="mt-4 w-full"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="50" cy="50" r="40" fill="#f59e0b" opacity="0.8" />
+              <rect
+                x="90"
+                y="20"
+                width="60"
+                height="60"
+                rx="8"
+                fill="#3b82f6"
+                opacity="0.8"
+              />
+              <polygon
+                points="160,80 190,20 220,80"
+                fill="#22c55e"
+                opacity="0.8"
+              />
+            </svg>
+          </div>
+          <div class="bg-white border border-zinc-200 rounded-xl p-8">
+            <code class="text-amber-500 text-xs"
+              >&lt;canvas&gt; — Pixel Drawing</code
+            >
+            <canvas
+              id="myCanvas"
+              width="200"
+              height="100"
+              class="mt-4 w-full"
+            ></canvas>
+            <script>
+              const ctx = document.getElementById("myCanvas").getContext("2d");
+              ctx.fillStyle = "#f59e0b";
+              ctx.fillRect(0, 0, 60, 100);
+              ctx.fillStyle = "#3b82f6";
+              ctx.fillRect(70, 20, 60, 60);
+              ctx.beginPath();
+              ctx.arc(170, 50, 40, 0, Math.PI * 2);
+              ctx.fillStyle = "#22c55e";
+              ctx.fill();
+            </script>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
